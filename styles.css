@@ -1,0 +1,57 @@
+body{
+    background-color:beige;
+}
+header{
+    display: grid;
+    align-items: center;
+    justify-content: center;
+}
+
+.warp {
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+article {
+    width: 100%;
+    max-width: 360px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 35px;
+}
+
+input{
+    height: 30px;
+}
+
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    width: 100%;
+    position: relative;
+}
+
+.buttons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#login{
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 4px;
+    width: 100px;
+    margin-bottom: 5px;
+}
+
+#sign{
+    font-size: 15px
+}
