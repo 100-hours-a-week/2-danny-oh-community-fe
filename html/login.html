@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="./styles.css">
+    <link rel="stylesheet" type="text/css" href="../styles.css">
     <title>Danny's community</title>
 </head>
 <body>
-    <header><h1>커뮤니티</h1></header>
+    <header><h1>danny의 커뮤니티</h1></header>
     <hr>
     <section class="warp">
         <h2>로그인</h2>
@@ -19,9 +19,10 @@
             <div class="inputBox">
                 <label><strong>비밀번호</strong></label>
                 <input type="password" name="pw" id="pw" placeholder="비밀번호를 입력하세요">
+                <label class="helper-text">*helper text</label>
             </div>
             <div class="buttons">
-                <button id="login">로그인</button>
+                <button class="submit-button" onclick="window.location.href='posts.html'">로그인</button>
                 <a id = "sign" href="signup.html">회원가입</a>
             </div>
         </article>
