@@ -22,4 +22,14 @@
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode
 
-node_modules
+
+node_modules/
+
+package.json
+package-lock.json
+yarn-error.json
+yarn.lock
+
+*.md
+
+*.log
