@@ -84,6 +84,18 @@ input {
     color: white;
 }
 
+.edit-submit{
+    margin-top: 10%;
+    text-align: center;
+    width: 100px;
+    background-color: #9982e668;
+    border-radius: 12px;
+    border: 0px solid #9982e668;
+    font-size: 20px;
+    padding: 5px;
+    color: white;
+}
+
 #sign {
     font-size: 15px;
 }
