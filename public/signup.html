@@ -25,15 +25,14 @@
         <section class="warp">
             <h2>회원가입</h2>
             <article>
-                <img class="image_file" src="/images/profile_img.png" />
+                <img id="profileImage" class="image_file" src="/images/profile_img.png" />
                 <div class="profile-img">
                     <label><strong>프로필 사진</strong></label>
                     <input
                         type="file"
                         class="real-upload"
                         accept="image/*"
-                        required
-                        multiple
+                        onchange="previewImage(event)"
                     />
                 </div>
                 <div class="inputBox">
@@ -82,5 +81,16 @@
                 </div>
             </article>
         </section>
+        <script>
+            // 이미지 미리보기 함수
+            function previewImage(event) {
+                const reader = new FileReader();
+                reader.onload = function(){
+                    const output = document.getElementById('profileImage');
+                    output.src = reader.result;
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        </script>
     </body>
 </html>
