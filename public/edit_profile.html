@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <title>Danny's community</title>
+    </head>
+    <body>
+        <header>
+            <button
+                class="back-button"
+                onclick="window.location.href='login.html'"
+            >
+                <img
+                    class="back-image"
+                    src="/images/back.png"
+                    alt="Back Button"
+                />
+            </button>
+            <h1 class="title">Danny의 커뮤니티</h1>
+            <button class="profile-button" onclick="toggleDropdown()">
+                <img class="mini-profile" src="/images/profile_img.png"/>
+            </button>
+            <div class="dropdown" id="dropdown-menu">
+                <ul>
+                    <li><a href="edit_profile.html">회원정보수정</a></li>
+                    <li><a href="edit_pass.html">비밀번호수정</a></li>
+                    <li><a href="login.html">로그아웃</a></li>
+                </ul>
+            </div>
+        </header>
+
+        <hr />
+        <section class="warp">
+            <h2>회원정보 수정</h2>
+            <article>
+                <img id="profileImage" class="image_file" src="/images/profile_img.png" />
+                <div class="profile-img">
+                    <label><strong>프로필 사진</strong></label>
+                    <input
+                        type="file"
+                        class="real-upload"
+                        accept="image/*"
+                        onchange="previewImage(event)"
+                    />
+                </div>
+                <div class="inputBox">
+                    <label><strong>이메일*</strong></label>
+                    <p>dus001228@naver.com</p>
+                </div>
+                <div class="inputBox">
+                    <label><strong>닉네임*</strong></label>
+                    <input
+                        type="password"
+                        name="pw"
+                        id="pw"
+                        placeholder="비밀번호를 입력하세요"
+                    />
+                    <label class="helper-text">*helper text</label>
+                </div>
+                <div class="buttons">
+                    <button class="submit-button">수정하기</button>
+                    <a id="sign" href="login.html">회원 탈퇴</a>
+                </div>
+            </article>
+            <button class="edit-submit">수정완료</button>
+        </section>
+        <script>
+            function toggleDropdown() {
+                const dropdown = document.getElementById("dropdown-menu");
+                dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
+            }
+            // 이미지 미리보기 함수
+            function previewImage(event) {
+                const reader = new FileReader();
+                reader.onload = function(){
+                    const output = document.getElementById('profileImage');
+                    output.src = reader.result;
+                };
+                reader.readAsDataURL(event.target.files[0]);
+            }
+        </script>
+    </body>
+</html>
