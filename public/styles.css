@@ -76,9 +76,9 @@ input {
 .submit-button {
     text-align: center;
     width: 300px;
-    background-color: #9a82e6;
+    background-color: #ACA0EB;
     border-radius: 12px;
-    border: 1px solid #9a82e6;
+    border: 1px solid #ACA0EB;
     font-size: 20px;
     padding: 5px;
     color: white;
@@ -232,7 +232,7 @@ hr {
     font-size: 15px;
     background-color: beige;
     border-radius: 12px;
-    border: 1px solid #9a82e6;
+    border: 1px solid #ACA0EB;
     cursor: pointer;
 }
 
@@ -375,9 +375,9 @@ textarea {
     margin-top: 30px;
     text-align: center;
     width: 100px;
-    background-color: #9982e6ae;
+    background-color: #ACA0EB;
     border-radius: 12px;
-    border: 1px solid #ad9ce6;
+    border: 1px solid #ACA0EB;
     font-size: 12px;
     padding: 5px;
     color: white;
