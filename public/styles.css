@@ -75,10 +75,23 @@ input {
 
 .submit-button {
     text-align: center;
+    height: 40px;
     width: 300px;
-    background-color: #9a82e6;
+    background-color: #ACA0EB;
     border-radius: 12px;
-    border: 1px solid #9a82e6;
+    border: 1px solid #ACA0EB;
+    font-size: 20px;
+    padding: 5px;
+    color: white;
+}
+
+.edit-submit{
+    margin-top: 10%;
+    text-align: center;
+    width: 100px;
+    background-color: #9982e668;
+    border-radius: 12px;
+    border: 0px solid #9982e668;
     font-size: 20px;
     padding: 5px;
     color: white;
@@ -93,10 +106,75 @@ input {
     color: red;
 }
 
-.profile-img {
-    border-radius: 50%;
+/* 프로필 사진을 감싸는 부모 컨테이너 */
+.profile-wrapper {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* 부모 요소의 전체 너비 */
+    margin-bottom: 20px; /* 필요에 따라 여백 조정 */
+}
+
+.profile-container {
+    position: relative;
+    width: 150px; /* 원하는 크기로 조정 */
+    height: 150px;
+    border-radius: 50%; /* 원형 */
+    overflow: hidden;
+    cursor: pointer;
+    border: 2px solid #ccc;
+    background-color: #d3d3d3; /* 업로드 전 회색 배경 */
+}
+
+.profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    background-color: #d3d3d3; /* 업로드 전 회색 배경 */
+}
+
+.edit-profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    display: flex; 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gainsboro;
+    font-size: 40px; /* 크기 조정 */
+}
+
+.edit-profile-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.edit-overay{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: gainsboro;
+    font-size: 20px; /* 크기 조정 */
+}
+
+.edit-overay-text{
+    border: white;
+    border-radius: 20px;
 }
 
 .image_file {
@@ -129,12 +207,16 @@ input {
     margin-left: 50%;
     font-size: 18px;
     color: white;
-    background-color: plum;
+    background-color: #ACA0EB;
     border: none;
     border-radius: 20px;
     width: 120px;
     padding: 5px;
     cursor: pointer;
+}
+
+.write-button:hover{
+    background-color: #7F6AEB;
 }
 
 /* 전체 게시물 컨테이너 */
@@ -220,7 +302,7 @@ hr {
     font-size: 15px;
     background-color: beige;
     border-radius: 12px;
-    border: 1px solid #9a82e6;
+    border: 1px solid #ACA0EB;
     cursor: pointer;
 }
 
@@ -306,7 +388,7 @@ textarea {
 }
 
 .dropdown li:hover {
-    background-color: #f1f1f1; /* 마우스 오버 시 배경색 변화 */
+    background-color: #e9e9e9; /* 마우스 오버 시 배경색 변화 */
 }
 
 #lottie-pop{
@@ -363,9 +445,9 @@ textarea {
     margin-top: 30px;
     text-align: center;
     width: 100px;
-    background-color: #9982e6ae;
+    background-color: #ACA0EB;
     border-radius: 12px;
-    border: 1px solid #ad9ce6;
+    border: 1px solid #ACA0EB;
     font-size: 12px;
     padding: 5px;
     color: white;
@@ -378,4 +460,28 @@ textarea {
     color: gray; /* 마우스 오버 시 색상 변화 */
     text-decoration: none; /* 밑줄 제거 */
     cursor: pointer; /* 커서 변경 */
+}
+
+.toast {
+    visibility: hidden;
+    min-width: 10%;
+    background-color: #ACA0EB;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    opacity: 0;
+    transform: translateX(-50%); /* 가로 기준 중앙 정렬 */
+    transition: opacity 0.5s, bottom 0.5s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 20%;
 }

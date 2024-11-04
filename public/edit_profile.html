@@ -35,51 +35,49 @@
         <section class="warp">
             <h2>회원정보 수정</h2>
             <article>
-                <img id="profileImage" class="image_file" src="/images/profile_img.png" />
-                <div class="profile-img">
-                    <label><strong>프로필 사진</strong></label>
-                    <input
-                        type="file"
-                        class="real-upload"
-                        accept="image/*"
-                        onchange="previewImage(event)"
-                    />
+                <div class="inputBox">
+                    <label><strong>프로필 사진*</strong></label>
+                    <div class="profile-wrapper">
+                        <div class="profile-container" onclick="triggerFileInput()">
+                            <img id="profileImage" class="profile-image" src="/images/default-profile.png"/>
+                            <div class="overlay">
+                                <span class="plus-icon">+</span>
+                            </div>
+                            <input type="file" id="fileInput" class="real-upload" accept="image/*" onchange="previewImage(event)" hidden />
+                        </div>
+                    </div>
                 </div>
                 <div class="inputBox">
-                    <label><strong>이메일*</strong></label>
+                    <label><strong>이메일</strong></label>
                     <p>dus001228@naver.com</p>
                 </div>
                 <div class="inputBox">
                     <label><strong>닉네임*</strong></label>
                     <input
-                        type="password"
-                        name="pw"
-                        id="pw"
-                        placeholder="비밀번호를 입력하세요"
+                        type="text"
+                        name="nickname"
+                        id="nickname"
+                        placeholder="닉네임을 입력하세요"
                     />
-                    <label class="helper-text">*helper text</label>
+                    <label id="helper-text-nickname" class="helper-text">*helper text</label>
                 </div>
                 <div class="buttons">
-                    <button class="submit-button">수정하기</button>
-                    <a id="sign" href="login.html">회원 탈퇴</a>
+                    <button id="submit-button" class="submit-button">수정하기</button>
+                    <a id="sign" onclick="openQuitModal()">회원 탈퇴</a>
+                </div>
+                <div class="modal" id="quit-modal">
+                    <div class="modal-content">
+                        <h2>정말 회원탈퇴 하시겠습니까?</h2>
+                        <p>회원탈퇴 시 복구 할 수 없습니다.</p>
+                        <div class="two-buttons">
+                            <button class="cancel-button-modal" onclick="closeQuitModal()">취소</button>
+                            <button class="submit-button-modal" onclick="quit()">탈퇴</button>
+                        </div>
+                    </div>
                 </div>
             </article>
-            <button class="edit-submit">수정완료</button>
+            <div id="toast" class="toast">수정 완료되었습니다!</div>
         </section>
-        <script>
-            function toggleDropdown() {
-                const dropdown = document.getElementById("dropdown-menu");
-                dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
-            }
-            // 이미지 미리보기 함수
-            function previewImage(event) {
-                const reader = new FileReader();
-                reader.onload = function(){
-                    const output = document.getElementById('profileImage');
-                    output.src = reader.result;
-                };
-                reader.readAsDataURL(event.target.files[0]);
-            }
-        </script>
+        <script src="js/edit_profile.js"></script>
     </body>
 </html>

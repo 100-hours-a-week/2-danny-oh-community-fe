@@ -33,40 +33,19 @@
                     <label class="helper-text">*helper text</label>
                 </div>
                 <div class="buttons">
-                    <div id="lottie-pop"></div>
                     <button
                         id="lottie-login"
                         class="submit-button"
-                        onclick="lottieToggle()"
+                        onclick="login()"
                     >
                         로그인
                     </button>
                     <a id="sign" href="signup.html">회원가입</a>
+                    <div id="lottie-pop"></div>
                 </div>
             </article>
         </section>
 
-        <script>
-            // 로티 애니메이션 설정
-            var lottieAni = bodymovin.loadAnimation({
-                container: document.getElementById('lottie-pop'),
-                path: 'https://assets10.lottiefiles.com/packages/lf20_u4rxwy4z.json',
-                renderer: 'svg',
-                loop: false,
-                autoplay: false,
-            });
-
-            function lottieToggle() {
-                const littie = document.getElementById("lottie-pop");
-                littie.style.display = 'flex';
-                lottieAni.stop(); // 애니메이션 초기화
-                lottieAni.play(); // 애니메이션 재생
-            }
-
-            // 애니메이션이 끝나면 페이지 이동
-            lottieAni.addEventListener('complete', function () {
-                window.location.href = 'posts.html';
-            });
-        </script>
+        <script src="js/login.js"></script>
     </body>
 </html>
