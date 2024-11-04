@@ -25,15 +25,18 @@
         <section class="warp">
             <h2>회원가입</h2>
             <article>
-                <img id="profileImage" class="image_file" src="/images/profile_img.png" />
-                <div class="profile-img">
+                <div class="inputBox">
                     <label><strong>프로필 사진</strong></label>
-                    <input
-                        type="file"
-                        class="real-upload"
-                        accept="image/*"
-                        onchange="previewImage(event)"
-                    />
+                    <label id="helper-text-profileImage" class="helper-text">*프로필 사진을 추가해주세요</label>
+                    <div class="profile-wrapper">
+                        <div class="profile-container" onclick="triggerFileInput()">
+                            <img id="profileImage" class="profile-image" src="/images/default-profile.png"/>
+                            <div class="overlay">
+                                <span class="plus-icon">+</span>
+                            </div>
+                            <input type="file" id="fileInput" class="real-upload" accept="image/*" onchange="previewImage(event)" hidden />
+                        </div>
+                    </div>
                 </div>
                 <div class="inputBox">
                     <label><strong>이메일*</strong></label>
@@ -43,37 +46,37 @@
                         id="id"
                         placeholder="이메일을 입력하세요"
                     />
-                    <label class="helper-text">*helper text</label>
+                    <label id="helper-text-email" class="helper-text">*helper text</label>
                 </div>
                 <div class="inputBox">
                     <label><strong>비밀번호*</strong></label>
                     <input
                         type="password"
                         name="pw"
-                        id="pw"
+                        id="pass1"
                         placeholder="비밀번호를 입력하세요"
                     />
-                    <label class="helper-text">*helper text</label>
+                    <label id="helper-text-pass1" class="helper-text">*helper text</label>
                 </div>
                 <div class="inputBox">
                     <label><strong>비밀번호 확인*</strong></label>
                     <input
                         type="password"
                         name="pw"
-                        id="pw"
+                        id="pass2"
                         placeholder="비밀번호를 입력하세요"
                     />
-                    <label class="helper-text">*helper text</label>
+                    <label id="helper-text-pass2" class="helper-text">*helper text</label>
                 </div>
                 <div class="inputBox">
                     <label><strong>닉네임*</strong></label>
                     <input
-                        type="password"
-                        name="pw"
-                        id="pw"
-                        placeholder="비밀번호를 입력하세요"
+                        type="text"
+                        name="nickname"
+                        id="nickname"
+                        placeholder="닉네임을 입력하세요"
                     />
-                    <label class="helper-text">*helper text</label>
+                    <label id="helper-text-nickname" class="helper-text">*helper text</label>
                 </div>
                 <div class="buttons">
                     <button class="submit-button">회원가입</button>
@@ -81,16 +84,6 @@
                 </div>
             </article>
         </section>
-        <script>
-            // 이미지 미리보기 함수
-            function previewImage(event) {
-                const reader = new FileReader();
-                reader.onload = function(){
-                    const output = document.getElementById('profileImage');
-                    output.src = reader.result;
-                };
-                reader.readAsDataURL(event.target.files[0]);
-            }
-        </script>
+        <script src="js/signup.js"></script>
     </body>
 </html>
