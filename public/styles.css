@@ -388,14 +388,14 @@ textarea {
 .modal {
     display: none; /* 기본적으로 숨김 */
     position: fixed; /* 고정 위치 */
-    z-index: 1; /* 다른 요소 위에 표시 */
+    z-index: 1000; /* 다른 요소 위에 표시 */
     left: 0;
     top: 0;
     width: 100%; /* 전체 화면 너비 */
     height: 100%; /* 전체 화면 높이 */
-    overflow: auto; /* 스크롤 가능 */
-    background-color: rgb(0,0,0); /* 검은색 배경 */
-    background-color: rgba(0,0,0,0.4); /* 반투명 배경 */
+    overflow: hidden; /* 스크롤 방지 */
+    background-color: rgba(0, 0, 0, 0.5); /* 불투명도 50% */
+    pointer-events: auto; /* 클릭 이벤트 차단 */
 }
 
 .modal-content {
