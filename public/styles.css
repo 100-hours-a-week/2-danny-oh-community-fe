@@ -112,7 +112,7 @@ input {
     justify-content: center;
     align-items: center;
     width: 100%; /* 부모 요소의 전체 너비 */
-    margin-bottom: 20px; /* 필요에 따라 여백 조정 */
+    margin-bottom: 20px;
 }
 
 .profile-container {
@@ -122,18 +122,9 @@ input {
     border-radius: 50%; /* 원형 */
     overflow: hidden;
     cursor: pointer;
-    border: 2px solid #ccc;
-    background-color: #d3d3d3; /* 업로드 전 회색 배경 */
 }
 
 .profile-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    background-color: #d3d3d3; /* 업로드 전 회색 배경 */
-}
-
-.edit-profile-image {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -153,29 +144,27 @@ input {
     font-size: 40px; /* 크기 조정 */
 }
 
-.edit-profile-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
 
-.edit-overay{
+.edit-overlay {
+    display: flex;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    display: flex;
     justify-content: center;
     align-items: center;
-    background-color: gainsboro;
     font-size: 20px; /* 크기 조정 */
+    background-color: rgba(0, 0, 0, 0.5); /* 약간의 투명 배경 */
+    color: #fff; /* 글자 색상 */
+    visibility: hidden; /* 기본적으로 숨김 */
 }
 
-.edit-overay-text{
-    border: white;
-    border-radius: 20px;
+/* 프로필 컨테이너 hover 시 overlay 표시 */
+.profile-container:hover .edit-overlay {
+    visibility: visible;
 }
+
 
 .image_file {
     border-radius: 50%;

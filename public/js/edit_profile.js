@@ -3,13 +3,13 @@ function toggleDropdown() {
     dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
 }
 
+
+const output = document.getElementById('profileImage');
 // 이미지 업로드 트리거
 function triggerFileInput() {
-    const output = document.getElementById('profileImage');
-    output.src = "";
-    document.querySelector('.overlay').style.display = 'flex';
+    output.src = "/images/profile_img.png";
+    document.querySelector('.edit-overlay').style.display = 'flex';
     document.getElementById('fileInput').click();
-    document.getElementById('helper-text-profileImage').style.display = 'flex';
 }
 
 // 이미지 미리보기
@@ -18,11 +18,7 @@ function previewImage(event) {
     if (file) {
         const reader = new FileReader();
         reader.onload = function () {
-            const output = document.getElementById('profileImage');
             output.src = reader.result;
-            // 사진이 업로드되면 overlay를 숨김
-            document.querySelector('.overlay').style.display = 'none';
-            document.getElementById('helper-text-profileImage').style.display = 'none';
         };
         reader.readAsDataURL(file);
     }
