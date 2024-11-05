@@ -58,16 +58,6 @@
                                 수정
                             </button>
                             <button class="detail-button" onclick="openPostModal()">삭제</button>
-                            <div class="modal" id="del-post-modal">
-                                <div class="modal-content">
-                                    <h2>게시글을 삭제하시겠습니까?</h2>
-                                    <p>삭제한 내용은 복구 할 수 없습니다.</p>
-                                    <div class="two-buttons">
-                                        <button class="cancel-button-modal" onclick="closePostModal()">취소</button>
-                                        <button class="submit-button-modal" onclick="closePostModal()">확인</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
                     <hr />
@@ -105,23 +95,15 @@
                 cols="70"
                 rows="5"
                 placeholder="댓글을 남겨주세요"
+                id="comment-input"
             ></textarea
-            ><br />
+            >
             <button
+                id='comment-submit'
                 class="write-button"
             >
                 댓글 작성
             </button>
-            <div class="modal" id="del-comment-modal">
-                <div class="modal-content">
-                    <h2>댓글을 삭제하시겠습니까?</h2>
-                    <p>삭제한 내용은 복구 할 수 없습니다.</p>
-                    <div class="two-buttons">
-                        <button class="cancel-button-modal" onclick="closeCommentModal()">취소</button>
-                        <button class="submit-button-modal" onclick="closeCommentModal()">확인</button>
-                    </div>
-                </div>
-            </div>
 
             <div class="comment">
                 <div class="comment-cover">
@@ -223,28 +205,28 @@
                 <br />
                 <span>더미 작성자 1</span>
             </div>
+            <div class="modal" id="del-post-modal">
+                <div class="modal-content">
+                    <h2>게시글을 삭제하시겠습니까?</h2>
+                    <p>삭제한 내용은 복구 할 수 없습니다.</p>
+                    <div class="two-buttons">
+                        <button class="cancel-button-modal" onclick="closePostModal()">취소</button>
+                        <button class="submit-button-modal" onclick="closePostModal()">확인</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal" id="del-comment-modal">
+                <div class="modal-content">
+                    <h2>댓글을 삭제하시겠습니까?</h2>
+                    <p>삭제한 내용은 복구 할 수 없습니다.</p>
+                    <div class="two-buttons">
+                        <button class="cancel-button-modal" onclick="closeCommentModal()">취소</button>
+                        <button class="submit-button-modal" onclick="closeCommentModal()">확인</button>
+                    </div>
+                </div>
+            </div>
         </article>
         </section>
-        <script>
-            function toggleDropdown() {
-                const dropdown = document.getElementById("dropdown-menu");
-                dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
-            }
-            function openPostModal() {
-                document.getElementById("del-post-modal").style.display = "block";
-            }
-
-            function closePostModal() {
-                document.getElementById("del-post-modal").style.display = "none";
-            }
-
-            function openCommentModal() {
-                document.getElementById("del-comment-modal").style.display = "block";
-            }
-
-            function closeCommentModal() {
-                document.getElementById("del-comment-modal").style.display = "none";
-            }
-        </script>
+        <script src="js/detail.js"></script>
     </body>
 </html>

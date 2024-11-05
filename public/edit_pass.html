@@ -40,31 +40,27 @@
                     <input
                         type="password"
                         name="pw"
-                        id="pw"
+                        id="pass1"
                         placeholder="비밀번호를 입력하세요"
                     />
-                    <label class="helper-text">*helper text</label>
+                    <label id="helper-text-pass1" class="helper-text">*helper text</label>
                 </div>
                 <div class="inputBox">
-                    <label><strong>비밀번호 확인*</strong></label>
+                    <label><strong>비밀번호 확인</strong></label>
                     <input
                         type="password"
                         name="pw"
-                        id="pw"
+                        id="pass2"
                         placeholder="비밀번호를 한번 더 입력하세요"
                     />
-                    <label class="helper-text">*helper text</label>
+                    <label id="helper-text-pass2" class="helper-text">*helper text</label>
                 </div>
                 <div class="buttons">
-                    <button class="submit-button">수정하기</button>
+                    <button id="submit-button" class="submit-button" disabled>수정하기</button>
                 </div>
+                <div id="toast" class="toast">수정 완료</div>
             </article>
         </section>
-        <script>
-            function toggleDropdown() {
-                const dropdown = document.getElementById("dropdown-menu");
-                dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
-            }
-        </script>
+        <script src="js/edit_pass.js"></script>
     </body>
 </html>
