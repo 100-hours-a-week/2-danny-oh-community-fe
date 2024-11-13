@@ -33,3 +33,5 @@ yarn.lock
 *.md
 
 *.log
+
+.env
