@@ -75,10 +75,45 @@ function toggleSubmitButton() {
 passInput1.addEventListener('input', toggleSubmitButton);
 passInput2.addEventListener('input', toggleSubmitButton);
 
+async function editPassword() {
+    const newPassword = document.getElementById('pass1').value;
+    try {
+        const response = await fetch('http://localhost:8000/user/password', {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ newPassword }),
+            credentials: 'include'  // 쿠키 포함
+        });
+        if (response.status === 204) {
+            console.log('비밀번호 변경 성공');
+            showToast('수정 완료', () => {
+                window.location.href = '/posts';
+            });
+        } else {
+            // 클라이언트 요청 에러 (상태 코드 400)
+            if (response.status === 400) {
+                console.log('유효하지 않은 요청입니다.');
+                alert('유효하지 않은 요청입니다.');
+            }
+            // 서버 내부 오류 (상태 코드 500)
+            else if (response.status === 500) {
+                console.log(' 서버에 오류가 발생했습니다.');
+                alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        }
+    } catch (error) {
+        console.error('요청 오류:', error);
+        alert('오류가 발생했습니다.');
+    }
+}
+
+
+
+
+
 // 회원가입 버튼 클릭 시 로그인 페이지로 이동
 submitButton.addEventListener('click', function() {
-    showToast('수정 완료', () => {
-        window.location.href = 'posts.html'; // 토스트가 끝난 후 화면 이동
-    });
+    editPassword();
 });
-ㅁ
