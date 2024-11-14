@@ -22,8 +22,12 @@ app.get('/posts', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'posts.html'));
 });
 
+app.get('/posting', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'add_post.html'));
+});
+
 app.get('/posts/:post_id', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', 'posts.html'));
+    res.sendFile(path.join(__dirname, 'public', 'detail.html'));
 });
 
 app.get('/posts/:post_id/edit', (req, res) => {
