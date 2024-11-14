@@ -3,14 +3,14 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <link rel="stylesheet" type="text/css" href="/styles.css" />
         <title>Danny's community</title>
     </head>
     <body>
         <header>
             <button
                 class="back-button"
-                onclick="window.location.href='login.html'"
+                onclick="window.history.back()"
             >
                 <img
                     class="back-image"
@@ -20,13 +20,13 @@
             </button>
             <h1 class="title">Danny의 커뮤니티</h1>
             <button class="profile-button" onclick="toggleDropdown()">
-                <img class="mini-profile" src="/images/profile_img.png"/>
+                <img id="profile_image" class="mini-profile" src=""/>
             </button>
             <div class="dropdown" id="dropdown-menu">
                 <ul>
-                    <li><a href="edit_profile.html">회원정보수정</a></li>
-                    <li><a href="edit_pass.html">비밀번호수정</a></li>
-                    <li><a href="login.html">로그아웃</a></li>
+                    <li><a id="edit_profile">회원정보수정</a></li>
+                    <li><a id="edit_password" >비밀번호수정</a></li>
+                    <li><a id = 'logout'>로그아웃</a></li>
                 </ul>
             </div>
         </header>
@@ -39,7 +39,7 @@
                     <label><strong>프로필 사진*</strong></label>
                     <div class="profile-wrapper">
                         <div class="profile-container" onclick="triggerFileInput()">
-                            <img id="profileImage" class="profile-image" src="/images/profile_img.png" />
+                            <img id="profileImage" class="profile-image" src="" />
                             <div class="edit-overlay">
                                 <span>수정</span>
                             </div>
@@ -78,6 +78,7 @@
             </article>
             <div id="toast" class="toast">수정 완료되었습니다!</div>
         </section>
-        <script src="js/edit_profile.js"></script>
+        <script src="/js/edit_profile.js"></script>
+        <script src="/js/common.js"> </script>
     </body>
 </html>
