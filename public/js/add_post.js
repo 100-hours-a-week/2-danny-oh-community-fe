@@ -1,8 +1,3 @@
-function toggleDropdown() {
-    const dropdown = document.getElementById("dropdown-menu");
-    dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
-}
-
 const titleInput = document.querySelector('input[type="text"]');
 const contentTextarea = document.querySelector('textarea');
 const submitButton = document.querySelector('.submit-button'); // 단일 요소 선택자로 변경
@@ -29,6 +24,49 @@ function toggleSubmitButton() {
     }
 }
 
+async function addPost() {
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('content').value;
+    const postImages = document.getElementById('postImage').files[0];  // 첫 번째 파일을 가져옵니다.
+
+    // FormData 객체를 생성하여 데이터를 전송
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    if (postImages) {
+        formData.append('postImage', postImages); 
+    }
+
+    try {
+        const response = await fetch('http://localhost:8000/posts', {
+            method: 'POST',
+            body: formData,
+            credentials: 'include'  // 쿠키 포함
+        });
+        if (response.status === 201) {
+            // 게시글 업로드 성공 시
+            console.log('게시글 업로드 성공');
+            // 업로드 후 posts 페이지로 이동
+            window.location.href = '/posts';  // 글 목록 페이지로 이동
+        } else {
+            // 클라이언트 요청 에러 (상태 코드 400)
+            if (response.status === 400) {
+                console.log('게시글');
+                alert('유효하지 않은 요청입니다.');
+            }
+            // 서버 내부 오류 (상태 코드 500)
+            else if (response.status === 500) {
+                console.log(' 성공');
+                alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        }
+    } catch (error) {
+        console.error('요청 오류:', error);
+        alert('오류가 발생했습니다.');
+    }
+}
+
+
 // 버튼 클릭 시 유효성 검사
 submitButton.addEventListener('click', (event) => {
     if (titleInput.value.trim() === '' || contentTextarea.value.trim() === '') {
@@ -37,6 +75,6 @@ submitButton.addEventListener('click', (event) => {
         helperText.style.display = 'block';
     } else {
         helperText.style.display = 'none';
-        window.location.href = 'posts.html';
+        addPost();
     }
 });
