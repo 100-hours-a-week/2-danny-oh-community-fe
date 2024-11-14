@@ -3,14 +3,14 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <link rel="stylesheet" type="text/css" href="/styles.css" />
         <title>게시글 수정</title>
     </head>
     <body>
         <header>
             <button
                 class="back-button"
-                onclick="window.location.href='posts.html'"
+                onclick="window.history.back()"
             >
                 <img
                     class="back-image"
@@ -20,13 +20,13 @@
             </button>
             <h1 class="title">Danny의 커뮤니티</h1>
             <button class="profile-button" onclick="toggleDropdown()">
-                <img class="mini-profile" src="/images/profile_img.png"/>
+                <img id="profile_image" class="mini-profile" src=""/>
             </button>
             <div class="dropdown" id="dropdown-menu">
                 <ul>
-                    <li><a href="edit_profile.html">회원정보수정</a></li>
-                    <li><a href="edit_pass.html">비밀번호수정</a></li>
-                    <li><a href="login.html">로그아웃</a></li>
+                    <li><a id="edit_profile">회원정보수정</a></li>
+                    <li><a id="edit_password" >비밀번호수정</a></li>
+                    <li><a id = 'logout'>로그아웃</a></li>
                 </ul>
             </div>
         </header>
@@ -39,6 +39,7 @@
                 <div class="inputBox">
                     <label><strong>제목*</strong></label>
                     <input
+                        id="title"
                         type="text"
                         placeholder="제목을 입력해주세요. (최대 26글자)"
                     />
@@ -46,6 +47,7 @@
                 <div class="inputBox">
                     <label><strong>내용*</strong></label>
                     <textarea
+                        id="content"
                         cols="30"
                         rows="10"
                         placeholder="내용을 입력해주세요."
@@ -58,8 +60,6 @@
                         type="file"
                         class="real-upload"
                         accept="image/*"
-                        required
-                        multiple
                     />
                 </div>
                 <div class="buttons">
@@ -72,6 +72,7 @@
                 </div>
             </article>
         </section>
-        <script src="js/edit_post.js"> </script>
+        <script src="/js/edit_post.js"> </script>
+        <script src="/js/common.js"> </script>
     </body>
 </html>
