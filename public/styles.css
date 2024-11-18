@@ -1,5 +1,6 @@
 body {
     background-color: beige;
+    padding-bottom: 10%;
 }
 
 header {
@@ -180,6 +181,11 @@ input {
     position: absolute;
     right: 25px;
     cursor: pointer;
+    width: 50px; /* 원하는 크기로 조정 */
+    height: 50px; /* 원하는 크기로 조정 */
+    border-radius: 50%; /* 원형 */
+    overflow: hidden;
+    cursor: pointer;
 }
 
 .mini-profile {
@@ -259,8 +265,19 @@ hr {
 }
 
 .profile {
+    width: 50px; /* 원하는 크기로 조정 */
+    height: 50px; /* 원하는 크기로 조정 */
+    border-radius: 50%; /* 원형으로 만들기 */
+    overflow: hidden; /* 이미지를 원형 안으로 잘라냄 */
+    cursor: pointer;
     background: none;
     border: none;
+    margin-right: 5px;
+}
+
+.profile img {
+    width: 50px;
+    object-fit: cover; /* 이미지의 비율을 유지하면서 요소에 맞게 채움 */
 }
 
 .two-buttons {
@@ -293,6 +310,14 @@ hr {
     border-radius: 12px;
     border: 1px solid #ACA0EB;
     cursor: pointer;
+}
+
+.detail-body img {
+    max-width: 100%;  /* 부모 요소의 너비에 맞게 이미지 크기 조정 */
+    height: auto;     /* 이미지의 비율을 유지하면서 높이를 자동으로 조정 */
+    object-fit: contain; /* 이미지의 비율을 유지하면서 부모 영역 내에 맞추기 */
+    display: block;   /* 이미지 주변에 불필요한 여백을 없애기 위해 block 속성 추가 */
+    margin: 0 auto;   /* 가운데 정렬 */
 }
 
 .three-buttons {

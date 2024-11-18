@@ -10,13 +10,13 @@
         <header>
             <h1 class="title">Danny의 커뮤니티</h1>
             <button class="profile-button" onclick="toggleDropdown()">
-                <img class="mini-profile" src="/images/profile_img.png"/>
+                <img id="profile_image" class="mini-profile" src=""/>
             </button>
             <div class="dropdown" id="dropdown-menu">
                 <ul>
-                    <li><a href="edit_profile.html">회원정보수정</a></li>
-                    <li><a href="edit_pass.html">비밀번호수정</a></li>
-                    <li><a href="login.html">로그아웃</a></li>
+                    <li><a id="edit_profile">회원정보수정</a></li>
+                    <li><a id="edit_password" >비밀번호수정</a></li>
+                    <li><a id = 'logout'>로그아웃</a></li>
                 </ul>
             </div>    
         </header>
@@ -36,7 +36,7 @@
                 
             </article>
         </section>
-
-        <script src="js/posts.js"></script>
+        <script src="/js/common.js"></script>
+        <script src="/js/posts.js"></script>
     </body>
 </html>

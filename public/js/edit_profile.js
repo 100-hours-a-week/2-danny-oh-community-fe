@@ -1,15 +1,12 @@
-function toggleDropdown() {
-    const dropdown = document.getElementById("dropdown-menu");
-    dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
-}
-
-
 const output = document.getElementById('profileImage');
+
+let imageFlag = false;
 // 이미지 업로드 트리거
 function triggerFileInput() {
     output.src = "/images/profile_img.png";
     document.querySelector('.edit-overlay').style.display = 'flex';
     document.getElementById('fileInput').click();
+    imageFlag = true;
 }
 
 // 이미지 미리보기
@@ -57,9 +54,7 @@ submitButton.addEventListener('click', function () {
     } else {
         // 닉네임 중복 체크 로직 구현 예정
         nicknamehelperText.style.display = 'none';
-        showToast('수정 완료', () => {
-            window.location.href = 'posts.html'; // 토스트가 끝난 후 화면 이동
-        });
+        updateUser();
     }
 });
 
@@ -72,7 +67,91 @@ function closeQuitModal() {
     document.getElementById("quit-modal").style.display = "none";
 }
 
-function quit() {
-    //회원 탈퇴 절차 진행 예정
-    window.location.href = 'login.html';
+async function load() {
+    try {
+        const response = await fetch(`http://localhost:8000/user`, {
+            method: 'GET',
+            credentials: 'include', // 쿠키를 포함하여 요청을 보냄
+        });
+
+        const data = await response.json();
+
+        if (response.status === 400) {
+            alert('로그인이 필요합니다.');
+            window.location.href = '/'; 
+            return
+        } 
+
+        document.getElementById('profileImage').src = data.profileImage ? `http://localhost:8000${data.profileImage}` : '/images/profile_img.png';
+        document.getElementById('nickname').value = data.nickname;
+    } catch (error) {
+        console.error('로드 오류:', error);
+        alert('오류가 발생했습니다.');
+    }
 }
+
+async function updateUser() {
+    const profileImage = document.getElementById('fileInput').files[0];
+    const nickname = document.getElementById('nickname').value;
+
+    // FormData 객체를 생성하여 데이터를 전송
+    const formData = new FormData();
+    formData.append('nickname', nickname);
+    formData.append('imageFlag', imageFlag);
+    console.log(imageFlag);
+    if (profileImage) {
+        formData.append('profileImage', profileImage); 
+    }
+    try {
+        const response = await fetch('http://localhost:8000/user', {
+            method: 'PATCH',
+            body: formData,
+            credentials: 'include'  // 쿠키 포함
+        });
+
+        if (response.status === 204) {
+            showToast('수정 완료', () => {
+                window.location.href = '/posts'; // 토스트가 끝난 후 화면 이동
+            });
+        } else {
+            if (response.status === 400) {
+                console.error('잘못된 요청입니다.');
+                alert('잘못된 요청입니다.');
+            } else if (response.status === 500) {
+                console.error('서버에 오류가 발생했습니다.');
+                alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        }
+    } catch (error) {
+        console.error('요청 오류:', error);
+        alert('오류가 발생했습니다.');
+    }
+}
+
+
+async function deleteUser() {
+    try {
+        const response = await fetch(`http://localhost:8000/user`, {
+            method: 'DELETE',
+            credentials: 'include', // 쿠키를 포함하여 요청을 보냄
+        });
+
+        if (response.status === 200) {
+            alert('탈퇴되었습니다.');
+            window.location.href = '/'; 
+            return
+        } else if (response.status === 400){
+            alert('잘못된 요청입니다.');
+        } else if (response.status === 401){
+            alert('로그인 된 상태여야 합니다.');
+        }
+
+    } catch (error) {
+        console.error('로드 오류:', error);
+        alert('오류가 발생했습니다.');
+    }
+}
+
+load();
+
+document.getElementById('delete_user_button').addEventListener('click', deleteUser);

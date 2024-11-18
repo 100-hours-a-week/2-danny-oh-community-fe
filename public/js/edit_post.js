@@ -1,12 +1,14 @@
-function toggleDropdown() {
-    const dropdown = document.getElementById("dropdown-menu");
-    dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
-}
-
 const titleInput = document.querySelector('input[type="text"]');
 const contentTextarea = document.querySelector('textarea');
 const submitButton = document.querySelector('.submit-button'); // 단일 요소 선택자로 변경
 const helperText = document.querySelector('.helper-text'); // 단일 요소 선택자로 변경
+// 초기 상태: 이미지 변경되지 않음
+let imageFlag = false;
+
+// 파일 입력 변경 시 호출되는 함수
+function editImage() {
+    imageFlag = true; // 파일이 변경되었음을 표시
+}
 
 // 제목 입력 제한 및 버튼 활성화 함수
 titleInput.addEventListener('input', () => {
@@ -37,6 +39,86 @@ submitButton.addEventListener('click', (event) => {
         helperText.style.display = 'block';
     } else {
         helperText.style.display = 'none';
-        window.location.href = 'posts.html';
+        updatePost();
     }
 });
+
+const pathSegments = window.location.pathname.split('/');
+const postId = pathSegments[pathSegments.length - 2];
+
+async function loadPosts() {
+    try {
+        const response = await fetch(`http://localhost:8000/posts/${postId}`, {
+            method: 'GET',
+            credentials: 'include', // 쿠키를 포함하여 요청을 보냄
+        });
+
+        const data = await response.json();
+
+        if (response.status === 400) {
+            alert('로그인이 필요합니다.');
+            window.location.href = '/'; 
+            return
+        } 
+
+        if (response.status === 404) {
+            alert('존재하지 않는 글입니다.');
+            window.location.href = '/posts'; 
+            return
+        }
+        document.getElementById('title').value = data.data.title
+        document.getElementById('content').value = data.data.content
+
+    } catch (error) {
+        console.error('게시글 로드 오류:', error);
+        alert('게시글 로드 중 오류가 발생했습니다.');
+    }
+}
+
+
+async function updatePost() {
+    const postImage = document.getElementById('postImage').files[0];
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('content').value;
+
+    // FormData 객체를 생성하여 데이터를 전송
+    const formData = new FormData();
+    formData.append('title', title);
+    formData.append('content', content);
+    formData.append('imageFlag', imageFlag);
+    console.log(imageFlag);
+    if (postImage) {
+        formData.append('postImage', postImage); 
+    }
+    try {
+        const response = await fetch(`http://localhost:8000/posts/${postId}`, {
+            method: 'PATCH',
+            body: formData,
+            credentials: 'include'  // 쿠키 포함
+        });
+
+        if (response.status === 204) {
+            alert('수정이 완료됐습니다.');
+            window.location.href = `/posts/${postId}`; // 토스트가 끝난 후 화면 이동
+        } else {
+            if (response.status === 400) {
+                console.error('잘못된 요청입니다.');
+                alert('잘못된 요청입니다.');
+            } else if (response.status === 500) {
+                console.error('서버에 오류가 발생했습니다.');
+                alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            }
+        }
+    } catch (error) {
+        console.error('요청 오류:', error);
+        alert('오류가 발생했습니다.');
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const postImage = document.getElementById('postImage');
+    if (postImage) {
+        postImage.addEventListener('click', editImage);
+    }
+});
+loadPosts();

@@ -1,10 +1,3 @@
-// 프로필 드롭다운
-function toggleDropdown() {
-    const dropdown = document.getElementById("dropdown-menu");
-    dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
-}
-
-//
 document.addEventListener("DOMContentLoaded", function () {
     const titles = document.querySelectorAll('.post-title h3');
     
@@ -16,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.getElementById('add_post_button').addEventListener('click', function(){
-    window.location.href = 'add_post.html'
+    window.location.href = '/posting'
 })
 
 
@@ -25,64 +18,62 @@ const postsContainer = document.querySelector(".warp article"); // 게시글을 
 const postsPerPage = 5; // 페이지당 표시할 게시글 수
 
 // 게시글을 추가하는 함수
-function loadPosts(page) {
-    fetch(`https://jsonplaceholder.typicode.com/posts?_page=${page}&_limit=${postsPerPage}`)
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(post => {
-                // 제목이 26자 이상이면 잘라내기
-                if (post.title.length > 26) {
-                    post.title = post.title.slice(0, 26);
-                }
-                
-                // 게시글 요소 생성
-                const postElement = document.createElement("div");
-                postElement.classList.add("post");
-                postElement.onclick = () => window.location.href = 'detail.html';
-
-                postElement.innerHTML = `
-                    <div class="post-header">
-                        <div class="post-title">
-                            <h3>${post.title}</h3>
-                            <div class="post-info">
-                                <p>좋아요 0 댓글 0 조회수 0</p>
-                            </div>
-                        </div>
-                        <div class="post-date">2024-01-01 00:00:00</div>
-                    </div>
-                    <hr />
-                    <div class="post-footer">
-                        <div class="author-info">
-                            <div class="author-avatar"></div>
-                            <span>작성자 ${post.userId}</span>
-                        </div>
-                    </div>
-                `;
-
-                postsContainer.appendChild(postElement);
-            });
-
-            // 새로운 게시글이 추가된 후 sentinel을 맨 마지막으로 이동
-            postsContainer.appendChild(sentinel);
-        })
-        .catch(error => {
-            console.error('Failed to load posts:', error);
+async function loadPosts() {
+    try {
+        const response = await fetch('http://localhost:8000/posts', {
+            method: 'GET',
+            credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
-}
 
-// 스크롤 감지
-const observer = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-        currentPage++;
-        loadPosts(currentPage); // 새로운 페이지의 5개 게시글 로드
+        const data = await response.json();
+
+        if (response.status === 400) {
+            window.location.href = '/'; 
+            return
+        }
+
+        if (!Array.isArray(data.data.posts)) {
+            console.error('데이터가 배열이 아닙니다:', data);
+            return;
+        }
+
+        data.data.posts.forEach(post => {  // 배열에 접근하여 반복문 실행
+            // 제목이 26자 이상이면 잘라내기
+            if (post.title.length > 26) {
+                post.title = post.title.slice(0, 26) + '...';  // 제목이 길면 '...'을 추가
+            }
+
+            // 게시글 요소 생성
+            const postElement = document.createElement("div");
+            postElement.classList.add("post");
+            postElement.onclick = () => window.location.href = `/posts/${post.post_id}`;  // 상세 페이지로 이동
+
+            postElement.innerHTML = `
+                <div class="post-header">
+                    <div class="post-title">
+                        <h3>${post.title}</h3>
+                        <div class="post-info">
+                            <p>좋아요 ${post.like_cnt} 댓글 ${post.comment_cnt} 조회수 ${post.view_cnt}</p>
+                        </div>
+                    </div>
+                    <div class="post-date">${post.created_at}</div>  <!-- 서버에서 받아온 날짜 표시 -->
+                </div>
+                <hr />
+                <div class="post-footer">
+                    <div class="author-info">
+                        <div class="author-avatar"></div>
+                        <span>작성자 ${post.author.nickname}</span>  <!-- 작성자의 닉네임 표시 -->
+                    </div>
+                </div>
+            `;
+
+            postsContainer.appendChild(postElement);
+        });
+    } catch (error) {
+        console.error('게시글 로드 오류:', error);
+        alert('게시글 로드 중 오류가 발생했습니다.');
     }
-}, { threshold: 1.0 }); 
+}
 
 // 게시글 초기 로드
 loadPosts(currentPage);
-
-// 더미 요소를 추가하여 스크롤 하단 감지
-const sentinel = document.createElement("div");
-sentinel.id = "sentinel";
-postsContainer.appendChild(sentinel);
-observer.observe(sentinel);
