@@ -117,3 +117,15 @@ async function login() {
 lottieAni.addEventListener('complete', function () {
     window.location.href = '/posts';  // 로그인 후 리디렉션
 });
+
+
+// 엔터 키로 로그인 실행
+function handleKeydown(event) {
+    if (event.key === 'Enter') {
+        login(); // 로그인 함수 호출
+    }
+}
+
+// 이메일과 비밀번호 입력 필드에 이벤트 리스너 추가
+document.getElementById('id').addEventListener('keydown', handleKeydown);
+document.getElementById('pw').addEventListener('keydown', handleKeydown);
