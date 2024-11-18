@@ -50,10 +50,10 @@
                             <strong id="author"></strong>
                         </div>
                         <p id="created_at"></p>
-                        <div class="two-buttons">
+                        <div id="edit-delete-buttons" class="two-buttons">
                             <button
+                                id="edit_post_button"
                                 class="detail-button"
-                                onclick="window.location.href = window.location.href + '/edit';"
                             >
                                 수정
                             </button>
@@ -95,7 +95,7 @@
                 <p>삭제한 내용은 복구 할 수 없습니다.</p>
                 <div class="two-buttons">
                     <button class="cancel-button-modal" onclick="closePostModal()">취소</button>
-                    <button class="submit-button-modal" onclick="closePostModal()">확인</button>
+                    <button id="delete_post_button" class="submit-button-modal">확인</button>
                 </div>
             </div>
         </div>
@@ -105,7 +105,7 @@
                 <p>삭제한 내용은 복구 할 수 없습니다.</p>
                 <div class="two-buttons">
                     <button class="cancel-button-modal" onclick="closeCommentModal()">취소</button>
-                    <button class="submit-button-modal" onclick="closeCommentModal()">확인</button>
+                    <button id="delete_comment_button" class="submit-button-modal">확인</button>
                 </div>
             </div>
         </div>
