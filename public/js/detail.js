@@ -25,6 +25,56 @@ function closeCommentModal() {
     document.body.style.overflow = 'auto'; // 백그라운드 스크롤 방지
 }
 
+function editComment(post_id, comment, comment_id) {
+    // 댓글 내용을 입력 필드에 세팅
+    document.getElementById('comment-input').value = comment;
+    document.getElementById('comment-input').focus();
+
+    // 버튼 텍스트 변경
+    const submitButton = document.getElementById('comment-submit');
+    submitButton.textContent = '댓글 수정';
+    console.log(comment_id);
+    // 기존 클릭 이벤트 제거 후 새 이벤트 추가
+    submitButton.replaceWith(submitButton.cloneNode(true));
+    document.getElementById('comment-submit').addEventListener('click', function () {
+        editCommentSend(post_id, comment_id);
+    });
+}
+
+async function editCommentSend(post_id, comment_id) {
+    try {
+        const content = document.getElementById('comment-input').value;
+        const response = await fetch(`http://localhost:8000/posts/${post_id}/comments/${comment_id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ content }),
+            credentials: 'include'  // 쿠키 포함
+        });
+
+        if (response.status === 200) {
+            alert('댓글 수정 완료');
+            location.reload(); // 페이지 새로고침으로 업데이트 반영
+        } else {
+            if (response.status === 404) {
+                console.error('존재하지 않는 댓글입니다.');
+                alert('존재하지 않는 댓글입니다.');
+            } else if (response.status === 500) {
+                console.error('서버에 오류가 발생했습니다.');
+                alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+            } else {
+                console.error('알 수 없는 오류:', response.status);
+                alert('알 수 없는 오류가 발생했습니다.');
+            }
+        }
+    } catch (error) {
+        console.error('요청 오류:', error);
+        alert('오류가 발생했습니다.');
+    }
+}
+
+
 document.getElementById('comment-input').addEventListener('input', function(){
     const commentInput = document.getElementById('comment-input');
     const submitButton = document.getElementById('comment-submit');
@@ -117,13 +167,16 @@ async function loadPosts() {
                     </div>
                     ${isAuthor ? `
                     <div class="two-buttons">
-                        <button class="detail-button">수정</button>
-                        <button class="detail-button" onclick="openCommentModal(${comment.comment_id})">삭제</button>
+                        <button class="detail-button" 
+                            onclick="editComment('${data.data.post_id}', '${comment.content}', ${comment.comment_id})">수정</button>
+                        <button class="detail-button" 
+                            onclick="openCommentModal(${comment.comment_id})">삭제</button>
                     </div>` : ''}
                 </div>
                 <br />
                 <span>${comment.content}</span>
             `;
+
 
             commentsContainer.appendChild(commentElement);
         });
