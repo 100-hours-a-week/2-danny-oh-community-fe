@@ -3,11 +3,11 @@ const contentTextarea = document.querySelector('textarea');
 const submitButton = document.querySelector('.submit-button'); // 단일 요소 선택자로 변경
 const helperText = document.querySelector('.helper-text'); // 단일 요소 선택자로 변경
 // 초기 상태: 이미지 변경되지 않음
-let imageFlag = false;
+let imageFlag = 0;
 
 // 파일 입력 변경 시 호출되는 함수
 function editImage() {
-    imageFlag = true; // 파일이 변경되었음을 표시
+    imageFlag = 1; // 파일이 변경되었음을 표시
 }
 
 // 제목 입력 제한 및 버튼 활성화 함수
@@ -86,10 +86,10 @@ async function updatePost() {
     formData.append('title', title);
     formData.append('content', content);
     formData.append('imageFlag', imageFlag);
-    console.log(imageFlag);
     if (postImage) {
         formData.append('postImage', postImage); 
     }
+    console.log(title, content, imageFlag);
     try {
         const response = await fetch(`http://localhost:8000/posts/${postId}`, {
             method: 'PATCH',
@@ -99,7 +99,7 @@ async function updatePost() {
 
         if (response.status === 204) {
             alert('수정이 완료됐습니다.');
-            window.location.href = `/posts/${postId}`; // 토스트가 끝난 후 화면 이동
+            window.location.href = `/posts/${postId}`;
         } else {
             if (response.status === 400) {
                 console.error('잘못된 요청입니다.');

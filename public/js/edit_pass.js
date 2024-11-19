@@ -92,12 +92,10 @@ async function editPassword() {
                 window.location.href = '/posts';
             });
         } else {
-            // 클라이언트 요청 에러 (상태 코드 400)
             if (response.status === 400) {
                 console.log('유효하지 않은 요청입니다.');
                 alert('유효하지 않은 요청입니다.');
             }
-            // 서버 내부 오류 (상태 코드 500)
             else if (response.status === 500) {
                 console.log(' 서버에 오류가 발생했습니다.');
                 alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
