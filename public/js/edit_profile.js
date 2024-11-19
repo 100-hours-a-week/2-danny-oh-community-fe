@@ -1,12 +1,12 @@
 const output = document.getElementById('profileImage');
 
-let imageFlag = false;
+let imageFlag = 0;
 // 이미지 업로드 트리거
 function triggerFileInput() {
     output.src = "/images/profile_img.png";
     document.querySelector('.edit-overlay').style.display = 'flex';
     document.getElementById('fileInput').click();
-    imageFlag = true;
+    imageFlag = 1;
 }
 
 // 이미지 미리보기
