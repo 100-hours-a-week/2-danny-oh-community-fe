@@ -1,5 +1,7 @@
 # 2-danny-oh-community-fe
 커뮤니티 프로젝트 프론트엔드 저장소
+https://github.com/100-hours-a-week/2-danny-oh-community-be
+위 백엔드 코드와 같이 실행시켜 주세요
 
 ![alt text](image-1.png)
 
@@ -20,7 +22,3 @@
 ## 실행 방법
 **1. 클론 후 의존성 설치**
 **2. 'node app.js' 명령어 실행**
-
-
-# 백엔드 저장소
-https://github.com/100-hours-a-week/2-danny-oh-community-be
