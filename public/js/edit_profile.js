@@ -155,3 +155,7 @@ async function deleteUser() {
 load();
 
 document.getElementById('delete_user_button').addEventListener('click', deleteUser);
+
+document.getElementById("go_title").addEventListener('click', ()=>{
+    window.location.href = '/posts'; 
+})
