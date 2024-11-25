@@ -46,8 +46,27 @@ async function loadPosts() {
             // 게시글 요소 생성
             const postElement = document.createElement("div");
             postElement.classList.add("post");
-            postElement.onclick = () => window.location.href = `/posts/${post.post_id}`;  // 상세 페이지로 이동
-
+            postElement.onclick = async () => {
+                try {
+                    const response = await fetch(`http://localhost:8000/posts/${post.post_id}/`, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        credentials: 'include'  // 쿠키 포함
+                    });
+            
+                    if (response.status === 204) {
+                        window.location.href = `/posts/${post.post_id}`;  // 상세 페이지로 이동
+                    } else {
+                            console.error('알 수 없는 오류:', response.status);
+                            alert('알 수 없는 오류가 발생했습니다.');
+                        }
+                }catch (error) {
+                    console.error('요청 오류:', error);
+                    alert('오류가 발생했습니다.');
+                }
+            }
             postElement.innerHTML = `
                 <div class="post-header">
                     <div class="post-title">
