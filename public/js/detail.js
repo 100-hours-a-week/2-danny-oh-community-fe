@@ -1,3 +1,7 @@
+document.getElementById("go_title").addEventListener('click', ()=>{
+    window.location.href = '/posts'; 
+})
+
 function openPostModal() {
     document.getElementById("del-post-modal").style.display = "block";
     document.body.style.overflow = 'hidden'; // 백그라운드 스크롤 방지
@@ -214,6 +218,27 @@ async function editPost() {
     }
 };
 
+
+async function likePost() {
+    try {
+        const response = await fetch(`http://localhost:8000/posts/${postId}/like`, {
+            method: 'post',
+            credentials: 'include', // 쿠키를 포함하여 요청을 보냄
+        });
+        if (response.status === 400) {
+            alert('로그인이 필요합니다.');
+            window.location.href = '/'; 
+            return
+        } 
+        if (response.status === 204){
+            location.reload();
+        }
+    } catch (error) {
+        console.error('로드 오류:', error);
+        alert('오류가 발생했습니다.');
+    }
+};
+
 async function deletePost(){
     try {
         const response = await fetch(`http://localhost:8000/posts/${postId}`, {
@@ -340,3 +365,4 @@ loadPosts();
 document.getElementById('delete_post_button').addEventListener('click', deletePost);
 document.getElementById('edit_post_button').addEventListener('click', editPost);
 document.getElementById('comment-submit').addEventListener('click', addComment);
+document.getElementById('like_cnt').addEventListener('click', likePost);

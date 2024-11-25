@@ -122,3 +122,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 loadPosts();
+
+document.getElementById("go_title").addEventListener('click', ()=>{
+    window.location.href = '/posts'; 
+})

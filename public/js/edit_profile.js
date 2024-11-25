@@ -81,7 +81,7 @@ async function load() {
             window.location.href = '/'; 
             return
         } 
-
+        document.getElementById('user_email').innerHTML = data.email;
         document.getElementById('profileImage').src = data.profileImage ? `http://localhost:8000${data.profileImage}` : '/images/profile_img.png';
         document.getElementById('nickname').value = data.nickname;
     } catch (error) {
@@ -118,7 +118,7 @@ async function updateUser() {
                 console.error('잘못된 요청입니다.');
                 alert('잘못된 요청입니다.');
             } else if (response.status === 500) {
-                console.error('서버에 오류가 발생했습니다.');
+                console.error('서버에 오류가 발생했습니다.')
                 alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
             }
         }
@@ -155,3 +155,7 @@ async function deleteUser() {
 load();
 
 document.getElementById('delete_user_button').addEventListener('click', deleteUser);
+
+document.getElementById("go_title").addEventListener('click', ()=>{
+    window.location.href = '/posts'; 
+})

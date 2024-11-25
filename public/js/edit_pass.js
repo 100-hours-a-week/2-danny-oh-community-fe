@@ -113,3 +113,7 @@ async function editPassword() {
 
 // 회원가입 버튼 클릭 시 로그인 페이지로 이동
 submitButton.addEventListener('click', editPassword);
+
+document.getElementById("go_title").addEventListener('click', ()=>{
+    window.location.href = '/posts'; 
+})
