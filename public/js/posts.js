@@ -100,7 +100,10 @@ loadPosts(currentPage);
 
 async function fetchActiveUsers() {
     try {
-        const response = await fetch('http://13.209.17.149:8000/active-users'); // 서버에서 접속자 목록 API 호출
+        const response = await fetch('http://13.209.17.149:8000/active-users', {
+            method: 'GET',
+            credentials: 'include', // 쿠키를 포함하여 요청을 보냄
+        });
         const users = await response.json();
 
         // HTML 요소를 가져옵니다.
@@ -110,7 +113,7 @@ async function fetchActiveUsers() {
         users.forEach(user => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
-                <img src="${user.profileImage}" alt="${user.nickname}의 프로필" />
+                <img src="${user.profileImage ? `http://13.209.17.149:8000${user.profileImage}` : '/images/profile_img.png'}" />
                 <span class="nickname">${user.nickname}</span>
             `;
             userList.appendChild(listItem);
