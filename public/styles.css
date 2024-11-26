@@ -502,3 +502,51 @@ textarea {
     opacity: 1;
     bottom: 20%;
 }
+
+
+/* 접속자 목록 스타일 */
+.active-users-section {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.active-users-section h2 {
+    margin-bottom: 15px;
+    font-size: 1.5rem;
+    color: #333;
+    text-align: center;
+}
+
+.active-users-list {
+    list-style: none;
+    padding: 0;
+}
+
+.active-users-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.active-users-list li:last-child {
+    border-bottom: none;
+}
+
+.active-users-list img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.active-users-list .nickname {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #555;
+}
