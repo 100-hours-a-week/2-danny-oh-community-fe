@@ -20,7 +20,7 @@ const postsPerPage = 5; // 페이지당 표시할 게시글 수
 // 게시글을 추가하는 함수
 async function loadPosts() {
     try {
-        const response = await fetch('http://localhost:8000/posts', {
+        const response = await fetch('http://13.209.17.149:8000/posts', {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -48,7 +48,7 @@ async function loadPosts() {
             postElement.classList.add("post");
             postElement.onclick = async () => {
                 try {
-                    const response = await fetch(`http://localhost:8000/posts/${post.post_id}/`, {
+                    const response = await fetch(`http://13.209.17.149:8000/posts/${post.post_id}/`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

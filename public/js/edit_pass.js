@@ -78,7 +78,7 @@ passInput2.addEventListener('input', toggleSubmitButton);
 async function editPassword() {
     const newPassword = document.getElementById('pass1').value;
     try {
-        const response = await fetch('http://localhost:8000/user/password', {
+        const response = await fetch('http://13.209.17.149:8000/user/password', {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

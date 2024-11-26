@@ -16,7 +16,7 @@ editPasswordButton.addEventListener('click', function() {
 const logoutButton = document.getElementById('logout');
 logoutButton.addEventListener('click', async function() {
     try {
-        const response = await fetch('http://localhost:8000/user/logout', {
+        const response = await fetch('http://13.209.17.149:8000/user/logout', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -54,7 +54,7 @@ logoutButton.addEventListener('click', async function() {
 // 게시글을 추가하는 함수
 async function load() {
     try {
-        const response = await fetch(`http://localhost:8000/user`, {
+        const response = await fetch(`http://13.209.17.149:8000/user`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -66,7 +66,7 @@ async function load() {
             return
         } 
 
-        document.getElementById('profile_image').src = data.profileImage ? `http://localhost:8000${data.profileImage}` : '/images/profile_img.png';
+        document.getElementById('profile_image').src = data.profileImage ? `http://13.209.17.149:8000${data.profileImage}` : '/images/profile_img.png';
     } catch (error) {
         console.error('로드 오류:', error);
         alert('오류가 발생했습니다.');

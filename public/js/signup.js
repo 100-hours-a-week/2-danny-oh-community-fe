@@ -152,7 +152,7 @@ async function signup() {
     }
 
     try {
-        const response = await fetch('http://localhost:8000/auth/signup', {
+        const response = await fetch('http://13.209.17.149:8000/auth/signup', {
             method: 'POST',
             body: formData,
             credentials: 'include'  // 쿠키 포함
