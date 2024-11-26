@@ -114,9 +114,9 @@ async function updateUser() {
                 window.location.href = '/posts'; // 토스트가 끝난 후 화면 이동
             });
         } else {
-            if (response.status === 400) {
+            if (response.status === 401) {
                 console.error('잘못된 요청입니다.');
-                alert('잘못된 요청입니다.');
+                alert('이미 존재하는 닉네이입니다.');
             } else if (response.status === 500) {
                 console.error('서버에 오류가 발생했습니다.')
                 alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
