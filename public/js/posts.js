@@ -94,9 +94,6 @@ async function loadPosts() {
     }
 }
 
-// 게시글 초기 로드
-loadPosts(currentPage);
-
 
 async function fetchActiveUsers() {
     try {

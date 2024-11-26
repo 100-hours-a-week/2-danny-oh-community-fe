@@ -512,7 +512,6 @@ textarea {
     width: 200px; /* 조그마한 너비 설정 */
     background: #fff; /* 살짝 투명한 흰 배경 */
     border-radius: 10px; /* 둥근 모서리 */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* 그림자 */
     padding: 10px;
     z-index: 1000; /* 다른 요소 위에 표시 */
     overflow-y: auto; /* 스크롤 가능 (접속자가 많을 경우 대비) */
