@@ -42,7 +42,7 @@ async function addPost() {
     }
 
     try {
-        const response = await fetch(`http://${process.env.DB_HOST}/posts`, {
+        const response = await fetch(`http://${process.env.ADDRESS}/posts`, {
             method: 'POST',
             body: formData,
             credentials: 'include'  // 쿠키 포함

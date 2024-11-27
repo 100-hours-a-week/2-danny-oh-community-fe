@@ -79,7 +79,7 @@ async function login() {
         document.querySelector('.helper-text').textContent = '';
 
         try {
-            const response = await fetch(`${process.env.DB_HOST}/auth/login`, {
+            const response = await fetch(`${process.env.ADDRESS}/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
