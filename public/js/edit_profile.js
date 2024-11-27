@@ -1,6 +1,4 @@
-import dotenv from 'dotenv';
 
-dotenv.config();
 
 const output = document.getElementById('profileImage');
 

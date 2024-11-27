@@ -1,6 +1,4 @@
-import dotenv from 'dotenv';
 
-dotenv.config();
 
 document.getElementById("go_title").addEventListener('click', ()=>{
     window.location.href = '/posts'; 

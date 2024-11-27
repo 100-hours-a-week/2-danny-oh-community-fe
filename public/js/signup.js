@@ -1,6 +1,4 @@
-import dotenv from 'dotenv';
 
-dotenv.config();
 
 // 이미지 업로드 트리거
 function triggerFileInput() {

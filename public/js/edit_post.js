@@ -1,6 +1,4 @@
-import dotenv from 'dotenv';
 
-dotenv.config();
 
 const titleInput = document.querySelector('input[type="text"]');
 const contentTextarea = document.querySelector('textarea');

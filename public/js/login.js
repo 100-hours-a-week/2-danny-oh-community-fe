@@ -1,6 +1,4 @@
-import dotenv from 'dotenv';
 
-dotenv.config();
 // 로티 애니메이션 설정
 var lottieAni = bodymovin.loadAnimation({
     container: document.getElementById('lottie-pop'),
