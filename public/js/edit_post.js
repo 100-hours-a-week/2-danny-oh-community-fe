@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const titleInput = document.querySelector('input[type="text"]');
 const contentTextarea = document.querySelector('textarea');
 const submitButton = document.querySelector('.submit-button'); // 단일 요소 선택자로 변경
@@ -48,7 +52,7 @@ const postId = pathSegments[pathSegments.length - 2];
 
 async function loadPosts() {
     try {
-        const response = await fetch(`http://localhost:8000/posts/${postId}`, {
+        const response = await fetch(`http://${process.env.DB_HOST}/posts/${postId}`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -91,7 +95,7 @@ async function updatePost() {
     }
     console.log(title, content, imageFlag);
     try {
-        const response = await fetch(`http://localhost:8000/posts/${postId}`, {
+        const response = await fetch(`http://${process.env.DB_HOST}/posts/${postId}`, {
             method: 'PATCH',
             body: formData,
             credentials: 'include'  // 쿠키 포함

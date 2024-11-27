@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 // 이미지 업로드 트리거
 function triggerFileInput() {
     const output = document.getElementById('profileImage');
@@ -152,7 +156,7 @@ async function signup() {
     }
 
     try {
-        const response = await fetch('http://localhost:8000/auth/signup', {
+        const response = await fetch(`http://${process.env.DB_HOST}/auth/signup`, {
             method: 'POST',
             body: formData,
             credentials: 'include'  // 쿠키 포함
@@ -164,8 +168,12 @@ async function signup() {
         } else {
             // 클라이언트 요청 에러 (상태 코드 400)
             if (response.status === 400) {
-                console.log('유효하지 않은 요청입니다.');
-                alert('유효하지 않은 요청입니다.');
+                console.log('이미 존재하는 이메일입니다.');
+                alert('이미 존재하는 이메일입니다.');
+            }
+            else if (response.status === 401) {
+                console.log('이미 존재하는 닉네임입니다.');
+                alert('이미 존재하는 닉네임입니다.');
             }
             // 서버 내부 오류 (상태 코드 500)
             else if (response.status === 500) {

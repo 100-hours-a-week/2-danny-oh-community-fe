@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const output = document.getElementById('profileImage');
 
 let imageFlag = 0;
@@ -69,7 +73,7 @@ function closeQuitModal() {
 
 async function load() {
     try {
-        const response = await fetch(`http://localhost:8000/user`, {
+        const response = await fetch(`http://${process.env.DB_HOST}/user`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -82,7 +86,7 @@ async function load() {
             return
         } 
         document.getElementById('user_email').innerHTML = data.email;
-        document.getElementById('profileImage').src = data.profileImage ? `http://localhost:8000${data.profileImage}` : '/images/profile_img.png';
+        document.getElementById('profileImage').src = data.profileImage ? `http://${process.env.DB_HOST}${data.profileImage}` : '/images/profile_img.png';
         document.getElementById('nickname').value = data.nickname;
     } catch (error) {
         console.error('로드 오류:', error);
@@ -103,7 +107,7 @@ async function updateUser() {
         formData.append('profileImage', profileImage); 
     }
     try {
-        const response = await fetch('http://localhost:8000/user', {
+        const response = await fetch('http://${process.env.DB_HOST}/user', {
             method: 'PATCH',
             body: formData,
             credentials: 'include'  // 쿠키 포함
@@ -114,9 +118,9 @@ async function updateUser() {
                 window.location.href = '/posts'; // 토스트가 끝난 후 화면 이동
             });
         } else {
-            if (response.status === 400) {
+            if (response.status === 401) {
                 console.error('잘못된 요청입니다.');
-                alert('잘못된 요청입니다.');
+                alert('이미 존재하는 닉네이입니다.');
             } else if (response.status === 500) {
                 console.error('서버에 오류가 발생했습니다.')
                 alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
@@ -131,7 +135,7 @@ async function updateUser() {
 
 async function deleteUser() {
     try {
-        const response = await fetch(`http://localhost:8000/user`, {
+        const response = await fetch(`http://${process.env.DB_HOST}/user`, {
             method: 'DELETE',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });

@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 document.addEventListener("DOMContentLoaded", function () {
     const titles = document.querySelectorAll('.post-title h3');
     
@@ -20,7 +24,7 @@ const postsPerPage = 5; // 페이지당 표시할 게시글 수
 // 게시글을 추가하는 함수
 async function loadPosts() {
     try {
-        const response = await fetch('http://localhost:8000/posts', {
+        const response = await fetch(`http://${process.env.DB_HOST}/posts`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -48,7 +52,7 @@ async function loadPosts() {
             postElement.classList.add("post");
             postElement.onclick = async () => {
                 try {
-                    const response = await fetch(`http://localhost:8000/posts/${post.post_id}/`, {
+                    const response = await fetch(`http://${process.env.DB_HOST}/posts/${post.post_id}/`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -94,5 +98,34 @@ async function loadPosts() {
     }
 }
 
-// 게시글 초기 로드
-loadPosts(currentPage);
+
+async function fetchActiveUsers() {
+    try {
+        const response = await fetch(`http://${process.env.DB_HOST}/active-users`, {
+            method: 'GET',
+            credentials: 'include', // 쿠키를 포함하여 요청을 보냄
+        });
+        const users = await response.json();
+
+        // HTML 요소를 가져옵니다.
+        const userList = document.getElementById('active-users-list');
+        userList.innerHTML = ''; // 기존 리스트 초기화
+
+        users.forEach(user => {
+            const listItem = document.createElement('li');
+            listItem.innerHTML = `
+                <img src="${user.profileImage ? `http://${process.env.DB_HOST}${user.profileImage}` : '/images/profile_img.png'}" />
+                <span class="nickname">${user.nickname}</span>
+            `;
+            userList.appendChild(listItem);
+        });
+    } catch (err) {
+        console.error('Failed to fetch active users:', err);
+    }
+}
+
+// 페이지 로드 시 접속자 목록을 로드합니다.
+document.addEventListener('DOMContentLoaded', () => {
+    fetchActiveUsers();
+    loadPosts(currentPage);
+});

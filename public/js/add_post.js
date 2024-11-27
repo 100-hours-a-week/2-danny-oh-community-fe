@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 const titleInput = document.querySelector('input[type="text"]');
 const contentTextarea = document.querySelector('textarea');
 const submitButton = document.querySelector('.submit-button'); // 단일 요소 선택자로 변경
@@ -38,7 +42,7 @@ async function addPost() {
     }
 
     try {
-        const response = await fetch('http://localhost:8000/posts', {
+        const response = await fetch(`http://${process.env.DB_HOST}/posts`, {
             method: 'POST',
             body: formData,
             credentials: 'include'  // 쿠키 포함
