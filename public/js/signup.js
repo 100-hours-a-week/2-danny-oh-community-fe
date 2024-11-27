@@ -156,7 +156,7 @@ async function signup() {
     }
 
     try {
-        const response = await fetch(`http://${process.env.ADDRESS}/auth/signup`, {
+        const response = await fetch(`http://13.209.17.149:8000/auth/signup`, {
             method: 'POST',
             body: formData,
             credentials: 'include'  // 쿠키 포함
