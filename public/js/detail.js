@@ -52,7 +52,7 @@ function editComment(post_id, comment, comment_id) {
 async function editCommentSend(post_id, comment_id) {
     try {
         const content = document.getElementById('comment-input').value;
-        const response = await fetch(`http://${process.env.DB_HOST}/posts/${post_id}/comments/${comment_id}`, {
+        const response = await fetch(`http://${process.env.ADDRESS}/posts/${post_id}/comments/${comment_id}`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ let userId;
 let postData;
 async function loadPosts() {
     try {
-        const response = await fetch(`http://${process.env.DB_HOST}/user`, {
+        const response = await fetch(`http://${process.env.ADDRESS}/user`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -121,7 +121,7 @@ async function loadPosts() {
 
 
     try {
-        const response = await fetch(`http://${process.env.DB_HOST}/posts/${postId}`, {
+        const response = await fetch(`http://${process.env.ADDRESS}/posts/${postId}`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -134,8 +134,8 @@ async function loadPosts() {
             window.location.href = '/posts'; 
             return
         }
-        document.getElementById('postImage').src = data.data.postImage ? `http://${process.env.DB_HOST}${data.data.postImage}` : ''
-        document.getElementById('author_image').src = data.data.author.profileImage ? `http://${process.env.DB_HOST}${data.data.author.profileImage}` : '/images/profile_img.png'
+        document.getElementById('postImage').src = data.data.postImage ? `http://${process.env.ADDRESS}${data.data.postImage}` : ''
+        document.getElementById('author_image').src = data.data.author.profileImage ? `http://${process.env.ADDRESS}${data.data.author.profileImage}` : '/images/profile_img.png'
         document.getElementById('title').textContent = `${data.data.title}`
         document.getElementById('content').textContent = `${data.data.content}`
         document.getElementById('like_cnt').innerHTML = `${data.data.like_cnt}<br>좋아요수`;
@@ -167,7 +167,7 @@ async function loadPosts() {
                     <div class="comment-header">
                         <div class="writer-profile">
                             <button class="profile">
-                                <img width="35px" src="${comment.author.profileImage ? `http://${process.env.DB_HOST}${comment.author.profileImage}` : '/images/profile_img.png'}" />
+                                <img width="35px" src="${comment.author.profileImage ? `http://${process.env.ADDRESS}${comment.author.profileImage}` : '/images/profile_img.png'}" />
                             </button>
                             <strong>${comment.author.nickname}</strong>
                         </div>
@@ -199,7 +199,7 @@ async function loadPosts() {
 
 async function editPost() {
     try {
-        const response = await fetch(`http://${process.env.DB_HOST}/user`, {
+        const response = await fetch(`http://${process.env.ADDRESS}/user`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -225,7 +225,7 @@ async function editPost() {
 
 async function likePost() {
     try {
-        const response = await fetch(`http://${process.env.DB_HOST}/posts/${postId}/like`, {
+        const response = await fetch(`http://${process.env.ADDRESS}/posts/${postId}/like`, {
             method: 'post',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -245,7 +245,7 @@ async function likePost() {
 
 async function deletePost(){
     try {
-        const response = await fetch(`http://${process.env.DB_HOST}/posts/${postId}`, {
+        const response = await fetch(`http://${process.env.ADDRESS}/posts/${postId}`, {
             method: 'DELETE',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -289,7 +289,7 @@ async function addComment() {
         return;
     }
     try {
-        const response = await fetch(`http://${process.env.DB_HOST}/posts/${postId}/comments`, {
+        const response = await fetch(`http://${process.env.ADDRESS}/posts/${postId}/comments`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -326,7 +326,7 @@ async function addComment() {
 
 async function deleteComment(commentId){
     try {
-        const response = await fetch(`http://${process.env.DB_HOST}/posts/${postId}/comments/${commentId}`, {
+        const response = await fetch(`http://${process.env.ADDRESS}/posts/${postId}/comments/${commentId}`, {
             method: 'DELETE',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
