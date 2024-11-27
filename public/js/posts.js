@@ -24,7 +24,7 @@ const postsPerPage = 5; // 페이지당 표시할 게시글 수
 // 게시글을 추가하는 함수
 async function loadPosts() {
     try {
-        const response = await fetch(`http://${process.env.ADDRESS}/posts`, {
+        const response = await fetch(`http://13.209.17.149:8000/posts`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -52,7 +52,7 @@ async function loadPosts() {
             postElement.classList.add("post");
             postElement.onclick = async () => {
                 try {
-                    const response = await fetch(`http://${process.env.ADDRESS}/posts/${post.post_id}/`, {
+                    const response = await fetch(`http://13.209.17.149:8000/posts/${post.post_id}/`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
@@ -101,7 +101,7 @@ async function loadPosts() {
 
 async function fetchActiveUsers() {
     try {
-        const response = await fetch(`http://${process.env.ADDRESS}/active-users`, {
+        const response = await fetch(`http://13.209.17.149:8000/active-users`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -114,7 +114,7 @@ async function fetchActiveUsers() {
         users.forEach(user => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
-                <img src="${user.profileImage ? `http://${process.env.ADDRESS}${user.profileImage}` : '/images/profile_img.png'}" />
+                <img src="${user.profileImage ? `http://13.209.17.149:8000${user.profileImage}` : '/images/profile_img.png'}" />
                 <span class="nickname">${user.nickname}</span>
             `;
             userList.appendChild(listItem);

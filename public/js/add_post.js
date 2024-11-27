@@ -42,7 +42,7 @@ async function addPost() {
     }
 
     try {
-        const response = await fetch(`http://${process.env.ADDRESS}/posts`, {
+        const response = await fetch(`http://13.209.17.149:8000/posts`, {
             method: 'POST',
             body: formData,
             credentials: 'include'  // 쿠키 포함
