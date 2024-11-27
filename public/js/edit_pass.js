@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 function toggleDropdown() {
     const dropdown = document.getElementById("dropdown-menu");
     dropdown.style.display = dropdown.style.display === "flex" ? "none" : "flex";
@@ -78,7 +82,7 @@ passInput2.addEventListener('input', toggleSubmitButton);
 async function editPassword() {
     const newPassword = document.getElementById('pass1').value;
     try {
-        const response = await fetch('http://13.209.17.149:8000/user/password', {
+        const response = await fetch(`http://${process.env.DB_HOST}/user/password`, {
             method: 'PATCH',
             headers: {
                 'Content-Type': 'application/json',

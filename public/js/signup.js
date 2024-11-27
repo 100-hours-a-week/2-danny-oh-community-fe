@@ -1,3 +1,7 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
+
 // 이미지 업로드 트리거
 function triggerFileInput() {
     const output = document.getElementById('profileImage');
@@ -152,7 +156,7 @@ async function signup() {
     }
 
     try {
-        const response = await fetch('http://13.209.17.149:8000/auth/signup', {
+        const response = await fetch(`http://${process.env.DB_HOST}/auth/signup`, {
             method: 'POST',
             body: formData,
             credentials: 'include'  // 쿠키 포함

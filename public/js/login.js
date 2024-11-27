@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+
+dotenv.config();
 // 로티 애니메이션 설정
 var lottieAni = bodymovin.loadAnimation({
     container: document.getElementById('lottie-pop'),
@@ -76,7 +79,7 @@ async function login() {
         document.querySelector('.helper-text').textContent = '';
 
         try {
-            const response = await fetch('http://13.209.17.149:8000/auth/login', {
+            const response = await fetch(`${process.env.DB_HOST}/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -117,7 +120,7 @@ async function login() {
 lottieAni.addEventListener('complete', function () {
     window.location.href = '/posts';  // 로그인 후 리디렉션
 });
-
+ 
 
 // 엔터 키로 로그인 실행
 function handleKeydown(event) {
