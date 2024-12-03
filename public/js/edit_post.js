@@ -50,7 +50,7 @@ const postId = pathSegments[pathSegments.length - 2];
 
 async function loadPosts() {
     try {
-        const response = await fetch(`http://13.209.17.149:8000/posts/${postId}`, {
+        const response = await fetch(`http://13.209.17.149/api/posts/${postId}`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -93,7 +93,7 @@ async function updatePost() {
     }
     console.log(title, content, imageFlag);
     try {
-        const response = await fetch(`http://13.209.17.149:8000/posts/${postId}`, {
+        const response = await fetch(`http://13.209.17.149/api/posts/${postId}`, {
             method: 'PATCH',
             body: formData,
             credentials: 'include'  // 쿠키 포함

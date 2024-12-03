@@ -71,7 +71,7 @@ function closeQuitModal() {
 
 async function load() {
     try {
-        const response = await fetch(`http://13.209.17.149:8000/user`, {
+        const response = await fetch(`http://13.209.17.149/api/user`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -84,7 +84,7 @@ async function load() {
             return
         } 
         document.getElementById('user_email').innerHTML = data.email;
-        document.getElementById('profileImage').src = data.profileImage ? `http://13.209.17.149:8000${data.profileImage}` : '/images/profile_img.png';
+        document.getElementById('profileImage').src = data.profileImage ? `http://13.209.17.149/api${data.profileImage}` : '/images/profile_img.png';
         document.getElementById('nickname').value = data.nickname;
     } catch (error) {
         console.error('로드 오류:', error);
@@ -105,7 +105,7 @@ async function updateUser() {
         formData.append('profileImage', profileImage); 
     }
     try {
-        const response = await fetch('http://13.209.17.149:8000/user', {
+        const response = await fetch('http://13.209.17.149/api/user', {
             method: 'PATCH',
             body: formData,
             credentials: 'include'  // 쿠키 포함
@@ -133,7 +133,7 @@ async function updateUser() {
 
 async function deleteUser() {
     try {
-        const response = await fetch(`http://13.209.17.149:8000/user`, {
+        const response = await fetch(`http://13.209.17.149/api/user`, {
             method: 'DELETE',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
