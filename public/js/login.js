@@ -1,18 +1,26 @@
-
-// 로티 애니메이션 설정
-var lottieAni = bodymovin.loadAnimation({
-    container: document.getElementById('lottie-pop'),
-    path: 'https://assets10.lottiefiles.com/packages/lf20_u4rxwy4z.json',
-    renderer: 'svg',
-    loop: false,
-    autoplay: false,
+document.addEventListener('DOMContentLoaded', function() {
+    lottieAni = bodymovin.loadAnimation({
+        container: document.getElementById('lottie-pop'),
+        path: 'https://assets10.lottiefiles.com/packages/lf20_u4rxwy4z.json',
+        renderer: 'svg',
+        loop: false,
+        autoplay: false,
+    });
 });
 
-function lotties(){
+function lotties() {
     const lottie = document.getElementById("lottie-pop");
-    lottie.style.display = 'flex';
-    lottieAni.stop(); // 애니메이션 초기화
-    lottieAni.play(); // 애니메이션 재생
+    if (!lottieAni) {
+        console.error("Lottie animation is not initialized");
+        return;
+    }
+    if (lottie) {
+        lottie.style.display = 'flex';
+        lottieAni.stop(); // 애니메이션 초기화
+        lottieAni.play(); // 애니메이션 재생
+    } else {
+        console.error("Element 'lottie-pop' not found");
+    }
 }
 
 // 이메일 형식 검사를 위한 정규표현식
