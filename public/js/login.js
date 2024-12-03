@@ -1,28 +1,3 @@
-document.addEventListener('DOMContentLoaded', function() {
-    lottieAni = bodymovin.loadAnimation({
-        container: document.getElementById('lottie-pop'),
-        path: 'https://assets10.lottiefiles.com/packages/lf20_u4rxwy4z.json',
-        renderer: 'svg',
-        loop: false,
-        autoplay: false,
-    });
-});
-
-function lotties() {
-    const lottie = document.getElementById("lottie-pop");
-    if (!lottieAni) {
-        console.error("Lottie animation is not initialized");
-        return;
-    }
-    if (lottie) {
-        lottie.style.display = 'flex';
-        lottieAni.stop(); // 애니메이션 초기화
-        lottieAni.play(); // 애니메이션 재생
-    } else {
-        console.error("Element 'lottie-pop' not found");
-    }
-}
-
 // 이메일 형식 검사를 위한 정규표현식
 function validateEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -99,7 +74,7 @@ async function login() {
             if (response.status === 200) {
                 // 로그인 성공 (상태 코드 200)
                 console.log('로그인 성공');
-                lotties();  // 애니메이션 시작
+                window.location.href = '/posts';  // 로그인 후 리디렉션
             } else {
                 // 클라이언트 요청 에러 (상태 코드 400)
                 if (response.status === 400 && responseData.message === "invalid_request") {
@@ -122,11 +97,6 @@ async function login() {
     }
 }
 
-// 애니메이션이 끝난 후 페이지 이동
-lottieAni.addEventListener('complete', function () {
-    window.location.href = '/posts';  // 로그인 후 리디렉션
-});
- 
 
 // 엔터 키로 로그인 실행
 function handleKeydown(event) {
