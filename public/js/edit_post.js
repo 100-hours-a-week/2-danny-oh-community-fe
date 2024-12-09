@@ -89,7 +89,7 @@ async function updatePost() {
     formData.append('content', content);
     formData.append('imageFlag', imageFlag);
     if (postImage) {
-        formData.append('postImage', postImage); 
+        formData.append('file', postImage); 
     }
     console.log(title, content, imageFlag);
     try {

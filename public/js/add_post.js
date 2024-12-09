@@ -36,7 +36,7 @@ async function addPost() {
     formData.append('title', title);
     formData.append('content', content);
     if (postImages) {
-        formData.append('postImage', postImages); 
+        formData.append('file', postImages); 
     }
 
     try {
