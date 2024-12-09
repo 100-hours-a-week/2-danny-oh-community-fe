@@ -102,7 +102,7 @@ async function updateUser() {
     formData.append('imageFlag', imageFlag);
     console.log(imageFlag);
     if (profileImage) {
-        formData.append('profileImage', profileImage); 
+        formData.append('file', profileImage); 
     }
     try {
         const response = await fetch('http://13.209.17.149/api/user', {

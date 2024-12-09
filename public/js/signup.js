@@ -150,7 +150,7 @@ async function signup() {
     formData.append('password', password);
     formData.append('nickname', nickname);
     if (profileImage) {
-        formData.append('profileImage', profileImage); 
+        formData.append('file', profileImage); 
     }
 
     try {
