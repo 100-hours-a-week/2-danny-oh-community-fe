@@ -84,7 +84,7 @@ async function load() {
             return
         } 
         document.getElementById('user_email').innerHTML = data.email;
-        document.getElementById('profileImage').src = data.profileImage ? `http://13.209.17.149/api${data.profileImage}` : '/images/profile_img.png';
+        document.getElementById('profileImage').src = data.profileImage ? `http://3.35.218.138:4000${data.profileImage}` : '/images/profile_img.png';
         document.getElementById('nickname').value = data.nickname;
     } catch (error) {
         console.error('로드 오류:', error);
