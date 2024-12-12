@@ -112,7 +112,7 @@ async function fetchActiveUsers() {
         users.forEach(user => {
             const listItem = document.createElement('li');
             listItem.innerHTML = `
-                <img src="${user.profileImage ? `http://3.35.218.138:4000${user.profileImage}` : '/images/profile_img.png'}" />
+                <img src="${user.profileImage ? `${user.profileImage}` : '/images/profile_img.png'}" />
                 <span class="nickname">${user.nickname}</span>
             `;
             userList.appendChild(listItem);
