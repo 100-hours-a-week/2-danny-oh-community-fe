@@ -77,12 +77,12 @@ async function login() {
                 window.location.href = '/posts';  // 로그인 후 리디렉션
             } else {
                 // 클라이언트 요청 에러 (상태 코드 400)
-                if (response.status === 400 && responseData.message === "invalid_request") {
+                if (response.status === 400) {
                     console.error('유효하지 않은 요청:', responseData.message);
                     alert('유효하지 않은 요청입니다.');
                 }
                 // 서버 내부 오류 (상태 코드 500)
-                else if (response.status === 500 && responseData.message === "internal_server_error") {
+                else if (response.status === 500) {
                     console.error('서버 오류:', responseData.message);
                     alert('유효하지 않은 아이디 혹은 비밀번호입니다.');
                 } else {
