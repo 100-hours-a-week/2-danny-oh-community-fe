@@ -49,6 +49,9 @@ jobs:
           script: |
             # Pull 최신 이미지
             docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+            # Nginx 설정 파일 경로
+            NGINX_CONFIG=/etc/nginx/sites-enabled/default
             
             # 기존 컨테이너 확인 및 포트 설정
             PORT=3000
@@ -71,4 +74,7 @@ jobs:
               docker rm community-fe-$OTHER_PORT
             fi
 
+            sudo sed -i "s|set \$active_frontend frontend-.*;|set \$active_frontend frontend-$PORT;|g" $NGINX_CONFIG
+            sudo systemctl reload nginx
+            
             echo "배포완료"
