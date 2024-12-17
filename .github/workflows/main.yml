@@ -48,7 +48,7 @@ jobs:
           username: ${{ secrets.USER }} # 해당 유저 접속 
           script: | # 실행 할 코드
             # Pull 최신 이미지
-            docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            docker pull 183295438985.dkr.ecr.ap-northeast-2.amazonaws.com/community-fe:0.1
 
             # Nginx 설정 파일 경로
             NGINX_CONFIG=/etc/nginx/sites-enabled/default
@@ -60,13 +60,15 @@ jobs:
             if docker ps | grep -q "0.0.0.0:3001"; then
               PORT=3000
               OTHER_PORT=3001
+              BG_MODE = blue
             else
               PORT=3001
               OTHER_PORT=3000
+              BG_MODE = green
             fi
 
             # 새 컨테이너 실행
-            docker run -d -p $PORT:3000 --name community-fe-$PORT $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+            docker run -d -p $PORT:3000 --name community-fe-$PORT 183295438985.dkr.ecr.ap-northeast-2.amazonaws.com/community-fe:0.1
 
             # 기존 컨테이너 중지 및 삭제
             if docker ps | grep -q "0.0.0.0:$OTHER_PORT"; then
@@ -74,7 +76,7 @@ jobs:
               docker rm community-fe-$OTHER_PORT
             fi
 
-            sudo sed -i "s|set \$active_frontend frontend-.*;|set \$active_frontend frontend-$PORT;|g" $NGINX_CONFIG
+            sudo sed -i "s|set \$active_frontend frontend-.*;|set \$active_frontend frontend-$BG_MODE;|g" $NGINX_CONFIG
             sudo systemctl reload nginx
             
             echo "배포완료"
