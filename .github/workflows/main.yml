@@ -60,11 +60,11 @@ jobs:
             if docker ps | grep -q "0.0.0.0:3001"; then
               PORT=3000
               OTHER_PORT=3001
-              BG_MODE = blue
+              BG_MODE=blue
             else
               PORT=3001
               OTHER_PORT=3000
-              BG_MODE = green
+              BG_MODE=green
             fi
 
             # 새 컨테이너 실행
