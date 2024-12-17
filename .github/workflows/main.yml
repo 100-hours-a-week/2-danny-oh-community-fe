@@ -40,13 +40,13 @@ jobs:
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
       # 5. EC2 서버에 SSH로 접근 및 배포
-      - name: Deploy to EC2
-        uses: appleboy/scp-action@v0.1.4
+      - name: ssh to ec2 # ec2에 접속하라.(필수 아님)
+        uses: appleboy/ssh-action@master # 접속 제공 코드
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
+          key: ${{ secrets.SSH_PRIVATE_KEY }} # 키페어 필요
+          host: ${{ secrets.HOST }} # ip
+          username: ${{ secrets.USER }} # 해당 유저 접속 
+          script: | # 실행 할 코드
             # Pull 최신 이미지
             docker pull $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
 
