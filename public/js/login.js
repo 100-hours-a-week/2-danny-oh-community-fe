@@ -7,7 +7,7 @@ function validateEmail(email) {
 // 이메일 입력값 확인
 function checkEmail() {
     const emailInput = document.getElementById('id');
-    const helperText = document.querySelector('.helper-text');
+    const helperText = document.getElementById('helper-text');
     
     if (!emailInput.value || !validateEmail(emailInput.value)) {
         helperText.textContent = '*올바른 이메일 주소 형식을 입력해주세요. (예: example@example.com)';
@@ -19,7 +19,7 @@ function checkEmail() {
 // 비밀번호 입력값 확인
 function checkPass() {
     const passInput = document.getElementById('pw');
-    const helperText = document.querySelector('.helper-text');
+    const helperText = document.getElementById('helper-text');
     
     if (!passInput.value) {
         helperText.textContent = '*비밀번호를 입력해주세요.';
@@ -35,7 +35,7 @@ function updateButtonState() {
     const emailValid = checkEmail();
     const loginButton = document.getElementById('lottie-login');  // 로그인 버튼
     if (emailValid && passValid) {
-        document.querySelector('.helper-text').textContent = '';
+        document.getElementById('helper-text').textContent = '';
         // 유효한 경우 버튼 활성화 및 색상 변경
         loginButton.style.backgroundColor = '#7F6AEE';  // 원하는 색상
         loginButton.disabled = false;  // 버튼 활성화
