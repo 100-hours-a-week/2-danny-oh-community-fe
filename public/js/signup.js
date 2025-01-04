@@ -34,7 +34,7 @@ function validateEmail(email) {
 // 비밀번호 유효성 검사 정규표현식
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
 // 닉네임 유효성 검사 정규표현식
-const nicknameRegex = /^[^\s]{1,10}$/;
+const nicknameRegex = /^[^\s]{1,10}+$/;
 
 // 이메일 유효성 검사
 const emailInput = document.getElementById('id');
@@ -57,23 +57,28 @@ emailInput.addEventListener('focusout', function () {
 
 // 비밀번호 유효성 검사
 const passInput1 = document.getElementById('pass1');
+const passInput2 = document.getElementById('pass2');
 const pass1helperText = document.getElementById('helper-text-pass1');
 
 passInput1.addEventListener('focusout', function () {
     const password1 = passInput1.value;
+    const password2 = passInput2.value;
     if (!password1) {
         pass1helperText.textContent = '*비밀번호를 입력해주세요.';
         pass1helperText.style.display = 'block';
     } else if (!passwordRegex.test(password1)) {
         pass1helperText.textContent = '*비밀번호는 8자 이상, 20자 이하이며, 대문자, 소문자, 숫자, 특수문자를 각각 최소 1개 포함해야 합니다.';
         pass1helperText.style.display = 'block';
+    
+    } else if (password1 !== password2) {
+        pass2helperText.textContent = '*비밀번호가 다릅니다.';
+        pass2helperText.style.display = 'block';
     } else {
         pass1helperText.style.display = 'none';
     }
 });
 
 // 비밀번호 확인 검사
-const passInput2 = document.getElementById('pass2');
 const pass2helperText = document.getElementById('helper-text-pass2');
 
 passInput2.addEventListener('focusout', function () {
@@ -95,9 +100,7 @@ passInput2.addEventListener('focusout', function () {
 const nicknameInput = document.getElementById('nickname');
 const nicknamehelperText = document.getElementById('helper-text-nickname');
 
-nicknameInput.addEventListener('focusout', function () {
-    const nickname = nicknameInput.value.trim();
-    
+nicknameInput.addEventListener('focusout', function () {    
     if (!nickname) {
         nicknamehelperText.textContent = '*닉네임을 입력해주세요.';
         nicknamehelperText.style.display = 'block';

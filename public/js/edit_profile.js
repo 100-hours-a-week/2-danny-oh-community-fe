@@ -40,10 +40,8 @@ function showToast(message, callback) {
 const nicknameInput = document.getElementById('nickname');
 const submitButton = document.getElementById('submit-button');
 const nicknamehelperText = document.getElementById('helper-text-nickname')
-const nicknameRegex = /^[^\s]*$/;
+const nicknameRegex = /^[^\s]{1,10}+$/;
 submitButton.addEventListener('click', function () {
-    const nickname = nicknameInput.value.trim();
-
     if (!nickname) {
         nicknamehelperText.textContent = '*닉네임을 입력해주세요.';
         nicknamehelperText.style.display = 'block';
@@ -54,7 +52,6 @@ submitButton.addEventListener('click', function () {
         nicknamehelperText.textContent = '*닉네임은 최대 10자 까지 작성 가능합니다.';
         nicknamehelperText.style.display = 'block';
     } else {
-        // 닉네임 중복 체크 로직 구현 예정
         nicknamehelperText.style.display = 'none';
         updateUser();
     }
