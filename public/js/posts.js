@@ -3,12 +3,6 @@ const postsContainer = document.querySelector(".warp article"); // 게시글을 
 const postsPerPage = 5; // 페이지당 표시할 게시글 수
 let isFetching = false; // 현재 데이터를 가져오는 중인지 확인
 
-const editPasswordButton = document.getElementById('add_post_button');
-editPasswordButton.addEventListener('click', function() {
-    window.location.href = '/posting'; 
-});
-
-
 // 게시글을 추가하는 함수
 async function loadPosts(page) {
     try {
