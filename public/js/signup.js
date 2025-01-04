@@ -100,9 +100,7 @@ passInput2.addEventListener('focusout', function () {
 const nicknameInput = document.getElementById('nickname');
 const nicknamehelperText = document.getElementById('helper-text-nickname');
 
-nicknameInput.addEventListener('focusout', function () {
-    const nickname = nicknameInput.value.trim();
-    
+nicknameInput.addEventListener('focusout', function () {    
     if (!nickname) {
         nicknamehelperText.textContent = '*닉네임을 입력해주세요.';
         nicknamehelperText.style.display = 'block';
