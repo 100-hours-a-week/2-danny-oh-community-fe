@@ -34,7 +34,7 @@ function validateEmail(email) {
 // 비밀번호 유효성 검사 정규표현식
 const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,20}$/;
 // 닉네임 유효성 검사 정규표현식
-const nicknameRegex = /^[^\s]{1,10}+$/;
+const nicknameRegex = /^[^\s]{1,10}$/;
 
 // 이메일 유효성 검사
 const emailInput = document.getElementById('id');

@@ -40,7 +40,7 @@ function showToast(message, callback) {
 const nicknameInput = document.getElementById('nickname');
 const submitButton = document.getElementById('submit-button');
 const nicknamehelperText = document.getElementById('helper-text-nickname')
-const nicknameRegex = /^[^\s]{1,10}+$/;
+const nicknameRegex = /^[^\s]{1,10}$/;
 submitButton.addEventListener('click', function () {
     if (!nickname) {
         nicknamehelperText.textContent = '*닉네임을 입력해주세요.';
