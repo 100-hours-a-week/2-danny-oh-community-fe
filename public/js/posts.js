@@ -1,37 +1,24 @@
-
-
-document.addEventListener("DOMContentLoaded", function () {
-    const titles = document.querySelectorAll('.post-title h3');
-    
-    titles.forEach(title => {
-        if (title.textContent.length > 26) {
-            title.textContent = title.textContent.slice(0, 26); // 26자 이상이면 잘라내고 '...' 추가
-        }
-    });
-});
-
-document.getElementById('add_post_button').addEventListener('click', function(){
-    window.location.href = '/posting'
-})
-
-
 let currentPage = 1; // 현재 페이지
 const postsContainer = document.querySelector(".warp article"); // 게시글을 추가할 컨테이너
 const postsPerPage = 5; // 페이지당 표시할 게시글 수
+let isFetching = false; // 현재 데이터를 가져오는 중인지 확인
 
 // 게시글을 추가하는 함수
-async function loadPosts() {
+async function loadPosts(page) {
     try {
-        const response = await fetch(`http://13.209.17.149/api/posts`, {
+        if (isFetching) return; // 이미 데이터를 가져오는 중이라면 중단
+        isFetching = true;
+
+        const response = await fetch(`http://13.209.17.149/api/posts?page=${page}&limit=${postsPerPage}`, {
             method: 'GET',
-            credentials: 'include', // 쿠키를 포함하여 요청을 보냄
+            credentials: 'include',
         });
 
         const data = await response.json();
 
         if (response.status === 400) {
-            window.location.href = '/'; 
-            return
+            window.location.href = '/';
+            return;
         }
 
         if (!Array.isArray(data.data.posts)) {
@@ -39,18 +26,17 @@ async function loadPosts() {
             return;
         }
 
-        data.data.posts.forEach(post => {  // 배열에 접근하여 반복문 실행
-            // 제목이 26자 이상이면 잘라내기
+        // 데이터 렌더링
+        data.data.posts.forEach(post => {
             if (post.title.length > 26) {
-                post.title = post.title.slice(0, 26) + '...';  // 제목이 길면 '...'을 추가
+                post.title = post.title.slice(0, 26) + '...';
             }
 
-            // 게시글 요소 생성
             const postElement = document.createElement("div");
             postElement.classList.add("post");
             postElement.onclick = async () => {
-                window.location.href = `/posts/${post.post_id}`;  // 상세 페이지로 이동
-            }
+                window.location.href = `/posts/${post.post_id}`;
+            };
             postElement.innerHTML = `
                 <div class="post-header">
                     <div class="post-title">
@@ -59,29 +45,41 @@ async function loadPosts() {
                             <p>좋아요 ${post.like_cnt} 댓글 ${post.comment_cnt} 조회수 ${post.view_cnt}</p>
                         </div>
                     </div>
-                    <div class="post-date">${post.created_at}</div>  <!-- 서버에서 받아온 날짜 표시 -->
+                    <div class="post-date">${post.created_at}</div>
                 </div>
                 <hr />
                 <div class="post-footer">
                     <div class="author-info">
                         <div class="author-avatar"></div>
-                        <span>작성자 ${post.author.nickname}</span>  <!-- 작성자의 닉네임 표시 -->
+                        <span>작성자 ${post.author.nickname}</span>
                     </div>
                 </div>
             `;
-
             postsContainer.appendChild(postElement);
         });
+
+        isFetching = false; // 데이터 가져오기 완료
     } catch (error) {
         console.error('게시글 로드 오류:', error);
         alert('게시글 로드 중 오류가 발생했습니다.');
+        isFetching = false;
     }
 }
 
+// 스크롤 이벤트 감지
+window.addEventListener("scroll", () => {
+    const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+
+    // 스크롤이 하단에 도달했을 때
+    if (scrollTop + clientHeight >= scrollHeight - 5) {
+        currentPage++;
+        loadPosts(currentPage); // 다음 페이지 로드
+    }
+});
 
 async function fetchActiveUsers() {
     try {
-        const response = await fetch(`http://13.209.17.149/api/active-users`, {
+        const response = await fetch(`http://13.209.17.149/api//active-users`, {
             method: 'GET',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
@@ -104,8 +102,8 @@ async function fetchActiveUsers() {
     }
 }
 
-// 페이지 로드 시 접속자 목록을 로드합니다.
-document.addEventListener('DOMContentLoaded', () => {
+// 초기 페이지 로드
+document.addEventListener("DOMContentLoaded", () => {
+    loadPosts(currentPage); // 첫 번째 페이지 로드
     fetchActiveUsers();
-    loadPosts(currentPage);
 });
