@@ -114,7 +114,7 @@ async function loadPosts() {
         userId = userData.user_id
     } catch (error) {
         console.error('로드 오류:', error);
-        alert('오류가 발생했습니다.');
+        alert('오류가 발생했습니다1212.');
     }
 
 
@@ -134,13 +134,13 @@ async function loadPosts() {
         }
         document.getElementById('postImage').src = data.data.postImage ? `${data.data.postImage}` : ''
         document.getElementById('author_image').src = data.data.author.profileImage ? `${data.data.author.profileImage}` : '/images/profile_img.png'
-        document.getElementById('title').textContent = `${data.data.title}`
-        document.getElementById('content').textContent = `${data.data.content}`
-        document.getElementById('like_cnt').innerHTML = `${data.data.like_cnt}<br>좋아요수`;
-        document.getElementById('comment_cnt').innerHTML = `${data.data.comment_cnt}<br>댓글수`;
-        document.getElementById('view_cnt').innerHTML = `${data.data.view_cnt}<br>조회수`;        
-        document.getElementById('author').textContent = `${data.data.author.nickname}`
-        document.getElementById('created_at').textContent = `${data.data.created_at}`
+        document.getElementById('title').textContent = data.data.title;
+        document.getElementById('content').textContent = data.data.content;
+        document.getElementById('like_cnt').textContent = `${data.data.like_cnt} 좋아요`;
+        document.getElementById('comment_cnt').textContent = `${data.data.comment_cnt} 댓글수`;
+        document.getElementById('view_cnt').textContent = `${data.data.view_cnt} 조회수`;
+        document.getElementById('author').textContent = data.data.author.nickname;
+        document.getElementById('created_at').textContent = data.data.created_at;
 
         // 게시글 수정/삭제 버튼 처리
         const editDeleteButtons = document.getElementById('edit-delete-buttons');
@@ -160,28 +160,34 @@ async function loadPosts() {
             // 댓글 작성자 ID와 user_id 비교
             const isAuthor = comment.author.user_id === userId;
 
-            commentElement.innerHTML = `
-                <div class="comment-cover">
-                    <div class="comment-header">
-                        <div class="writer-profile">
-                            <button class="profile">
-                                <img width="35px" src="${comment.author.profileImage ? `${comment.author.profileImage}` : '/images/profile_img.png'}" />
-                            </button>
-                            <strong>${comment.author.nickname}</strong>
-                        </div>
-                        <div class="comment-date">${comment.created_at}</div>
+            // 모든 데이터를 텍스트로 표시
+        const profileImage = comment.author.profileImage || '/images/profile_img.png';
+        commentElement.innerHTML = `
+            <div class="comment-cover">
+                <div class="comment-header">
+                    <div class="writer-profile">
+                        <button class="profile">
+                            <img width="35px" src="${profileImage}" />
+                        </button>
+                        <strong>${comment.author.nickname}</strong>
                     </div>
-                    ${isAuthor ? `
-                    <div class="two-buttons">
-                        <button class="detail-button" 
-                            onclick="editComment('${data.data.post_id}', '${comment.content}', ${comment.comment_id})">수정</button>
-                        <button class="detail-button" 
-                            onclick="openCommentModal(${comment.comment_id})">삭제</button>
-                    </div>` : ''}
+                    <div class="comment-date">${comment.created_at}</div>
                 </div>
-                <br />
-                <span>${comment.content}</span>
-            `;
+                ${isAuthor ? `
+                <div class="two-buttons">
+                    <button class="detail-button" 
+                        onclick="editComment('${data.data.post_id}', '${comment.content}', ${comment.comment_id})">수정</button>
+                    <button class="detail-button" 
+                        onclick="openCommentModal(${comment.comment_id})">삭제</button>
+                </div>` : ''}
+            </div>
+            <br />
+            <span>${comment.content}</span>
+        `;
+
+        // nickname과 content를 텍스트로 표시
+        commentElement.querySelector('strong').textContent = comment.author.nickname;
+        commentElement.querySelector('span').textContent = comment.content;
 
 
             commentsContainer.appendChild(commentElement);
