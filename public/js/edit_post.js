@@ -106,7 +106,13 @@ async function updatePost() {
             if (response.status === 400) {
                 console.error('잘못된 요청입니다.');
                 alert('잘못된 요청입니다.');
-            } else if (response.status === 500) {
+            } else if (response.status === 403){
+                console.error('왜 남의 게시글을 수정하려 하십니까..');
+                alert('왜 남의 게시글을 수정하려 하십니까.. 돌아가세요');
+                window.location.href = '/posts'; 
+                return
+            }
+            else if (response.status === 500) {
                 console.error('서버에 오류가 발생했습니다.');
                 alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
             }
