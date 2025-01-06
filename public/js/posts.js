@@ -2,7 +2,7 @@
 
 let currentPage = 1; // 현재 페이지
 const postsContainer = document.querySelector(".warp article"); // 게시글을 추가할 컨테이너
-const postsPerPage = 5; // 페이지당 표시할 게시글 수
+const postsPerPage = 10; // 페이지당 표시할 게시글 수
 let isFetching = false; // 현재 데이터를 가져오는 중인지 확인
 
 // 게시글을 추가하는 함수
