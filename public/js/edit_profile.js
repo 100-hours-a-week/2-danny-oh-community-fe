@@ -1,27 +1,38 @@
-
-
 const output = document.getElementById('profileImage');
 
 let imageFlag = 0;
+
+// 최대 이미지 크기 제한 (5MB)
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+
 // 이미지 업로드 트리거
 function triggerFileInput() {
-    output.src = "/images/profile_img.png";
-    document.querySelector('.edit-overlay').style.display = 'flex';
-    document.getElementById('fileInput').click();
+    output.src = "/images/profile_img.png"; // 기본 프로필 이미지 설정
+    document.querySelector('.edit-overlay').style.display = 'flex'; // 오버레이 표시
+    document.getElementById('fileInput').click(); // 파일 선택 창 열기
     imageFlag = 1;
 }
 
-// 이미지 미리보기
+// 이미지 미리보기 및 검증
 function previewImage(event) {
     const file = event.target.files[0];
+
     if (file) {
+        // 파일 크기 확인
+        if (file.size > MAX_FILE_SIZE) {
+            alert(`이미지 크기가 5MB를 초과했습니다. (현재 크기: ${(file.size / (1024 * 1024)).toFixed(2)}MB)`);
+            event.target.value = ""; // 파일 입력 초기화
+            return;
+        }
+        // 유효한 이미지인 경우 미리보기 설정
         const reader = new FileReader();
         reader.onload = function () {
-            output.src = reader.result;
+            output.src = reader.result; // 이미지를 미리보기로 표시
         };
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file); // 파일을 읽음
     }
 }
+
 
 function showToast(message, callback) {
     const toast = document.getElementById('toast');
@@ -39,21 +50,21 @@ function showToast(message, callback) {
 // 닉네임 유효성 검사
 const nicknameInput = document.getElementById('nickname');
 const submitButton = document.getElementById('submit-button');
-const nicknamehelperText = document.getElementById('helper-text-nickname')
-const nicknameRegex = /^[^\s]{1,10}$/;
+const nicknameHelperText = document.getElementById('helper-text-nickname');
+const nicknameRegex = /^[^\s]{1,10}$/; // 공백 없는 1~10자
+
 submitButton.addEventListener('click', function () {
+    const nickname = nicknameInput.value; // 입력값 가져오기 및 양끝 공백 제거
+
     if (!nickname) {
-        nicknamehelperText.textContent = '*닉네임을 입력해주세요.';
-        nicknamehelperText.style.display = 'block';
+        nicknameHelperText.textContent = '*닉네임을 입력해주세요.';
+        nicknameHelperText.style.display = 'block';
     } else if (!nicknameRegex.test(nickname)) {
-        nicknamehelperText.textContent = '*띄어쓰기를 없애주세요.';
-        nicknamehelperText.style.display = 'block';
-    } else if (nickname.length > 10) {
-        nicknamehelperText.textContent = '*닉네임은 최대 10자 까지 작성 가능합니다.';
-        nicknamehelperText.style.display = 'block';
+        nicknameHelperText.textContent = '*닉네임에 띄어쓰기를 제거해주세요.';
+        nicknameHelperText.style.display = 'block';
     } else {
-        nicknamehelperText.style.display = 'none';
-        updateUser();
+        nicknameHelperText.style.display = 'none'; // 유효성 문제 없음
+        updateUser(); // 닉네임 업데이트 함수 호출
     }
 });
 

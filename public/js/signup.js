@@ -1,29 +1,40 @@
-
+// 최대 이미지 크기 제한 (5MB)
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
 
 // 이미지 업로드 트리거
 function triggerFileInput() {
     const output = document.getElementById('profileImage');
-    output.src = "";
-    document.querySelector('.overlay').style.display = 'flex';
-    document.getElementById('fileInput').click();
-    document.getElementById('helper-text-profileImage').style.display = 'flex';
+    output.src = ""; // 기존 이미지를 초기화
+    document.querySelector('.overlay').style.display = 'flex'; // overlay 보이기
+    document.getElementById('fileInput').click(); // 파일 선택 창 열기
+    document.getElementById('helper-text-profileImage').style.display = 'flex'; // 도움말 표시
 }
 
-// 이미지 미리보기
+// 이미지 미리보기 및 크기 제한
 function previewImage(event) {
     const file = event.target.files[0];
+
     if (file) {
+        // 파일 크기 확인
+        if (file.size > MAX_FILE_SIZE) {
+            alert(`이미지 크기가 5MB를 초과했습니다. (현재 크기: ${(file.size / (1024 * 1024)).toFixed(2)}MB)`);
+            event.target.value = ""; // 파일 입력 초기화
+            document.getElementById('profileImage').src = "/images/profile_img.png"; // 기본 이미지 복구
+            return;
+        }
+
+        // 유효한 크기의 파일인 경우 미리보기
         const reader = new FileReader();
         reader.onload = function () {
             const output = document.getElementById('profileImage');
-            output.src = reader.result;
-            // 사진이 업로드되면 overlay를 숨김
-            document.querySelector('.overlay').style.display = 'none';
-            document.getElementById('helper-text-profileImage').style.display = 'none';
+            output.src = reader.result; // 이미지를 미리보기로 표시
+            document.querySelector('.overlay').style.display = 'none'; // overlay 숨기기
+            document.getElementById('helper-text-profileImage').style.display = 'none'; // 도움말 숨기기
         };
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file); // 파일 내용을 읽음
     }
 }
+
 
 // 이메일 형식 검사를 위한 정규표현식
 function validateEmail(email) {
