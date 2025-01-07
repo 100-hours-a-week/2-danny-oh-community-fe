@@ -115,7 +115,7 @@ nicknameInput.addEventListener('focusout', function () {
     if (!nickname) {
         nicknamehelperText.textContent = '*닉네임을 입력해주세요.';
         nicknamehelperText.style.display = 'block';
-    } else if (!nicknameRegex.test(nickname)) {
+    } else if (!nicknameRegex.test(nicknameInput.value)) {
         nicknamehelperText.textContent = '*띄어쓰기를 없애주세요';
         nicknamehelperText.style.display = 'block';
     } else if (nickname.length > 10) {
