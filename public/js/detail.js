@@ -231,22 +231,23 @@ async function editPost() {
 async function likePost() {
     try {
         const response = await fetch(`http://13.209.17.149/api/posts/${postId}/like`, {
-            method: 'post',
+            method: 'POST',
             credentials: 'include', // 쿠키를 포함하여 요청을 보냄
         });
-        if (response.status === 400) {
-            alert('로그인이 필요합니다.');
-            window.location.href = '/'; 
-            return
-        } 
-        if (response.status === 204){
-            location.reload();
+
+        if (response.ok) {
+            const data = await response.json(); // 응답 JSON 파싱
+            document.getElementById('like_cnt').textContent = `${data.likeCount} 좋아요`;
+        } else {
+            console.error('서버 오류:', response.status);
+            alert('좋아요 처리 중 오류가 발생했습니다.');
         }
     } catch (error) {
         console.error('로드 오류:', error);
         alert('오류가 발생했습니다.');
     }
-};
+}
+
 
 async function deletePost(){
     try {
@@ -368,8 +369,10 @@ async function deleteComment(commentId){
     }
 };
 
-
-loadPosts();
+// 초기 페이지 로드
+document.addEventListener("DOMContentLoaded", () => {
+    loadPosts();
+});
 
 document.getElementById('delete_post_button').addEventListener('click', deletePost);
 document.getElementById('edit_post_button').addEventListener('click', editPost);
