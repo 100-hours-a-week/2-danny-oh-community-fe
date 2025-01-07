@@ -37,6 +37,14 @@ async function loadPosts(page) {
             const postElement = document.createElement("div");
             postElement.classList.add("post");
             postElement.onclick = async () => {
+                const response = await fetch(`http://13.209.17.149/api/posts/${post.post_id}`, {
+                    method: 'post',
+                    credentials: 'include',
+                });
+                if (response.status === 400) {
+                    window.location.href = '/';
+                    return;
+                }
                 window.location.href = `/posts/${post.post_id}`;
             };
     
