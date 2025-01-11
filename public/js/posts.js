@@ -64,7 +64,11 @@ async function loadPosts(page) {
     
             const postDate = document.createElement("div");
             postDate.classList.add("post-date");
-            postDate.textContent = post.created_at;
+            if (post.updated_at){
+                postDate.textContent = `${post.updated_at} (수정됨)`;
+            } else{
+                postDate.textContent = post.created_at;
+            }
     
             postTitle.appendChild(titleElement);
             postTitle.appendChild(postInfo);
