@@ -59,6 +59,9 @@ submitButton.addEventListener('click', function () {
     if (!nickname) {
         nicknameHelperText.textContent = '*닉네임을 입력해주세요.';
         nicknameHelperText.style.display = 'block';
+    } else if (nickname.length > 10) { // 닉네임이 10글자 이상인 경우
+        nicknameHelperText.textContent = '*닉네임은 10글자 이하로 입력해주세요.';
+        nicknameHelperText.style.display = 'block';
     } else if (!nicknameRegex.test(nickname)) {
         nicknameHelperText.textContent = '*닉네임에 띄어쓰기를 제거해주세요.';
         nicknameHelperText.style.display = 'block';

@@ -33,13 +33,15 @@ function closeCommentModal() {
 
 function editComment(post_id, comment, comment_id) {
     // 댓글 내용을 입력 필드에 세팅
-    document.getElementById('comment-input').value = comment;
-    document.getElementById('comment-input').focus();
+    const commentText = JSON.parse(comment);
+    const commentInput = document.getElementById('comment-input');
+    commentInput.value = commentText; // 줄바꿈 처리를 위해 value 사용
+    commentInput.focus();
 
     // 버튼 텍스트 변경
     const submitButton = document.getElementById('comment-submit');
     submitButton.textContent = '댓글 수정';
-    console.log(comment_id);
+
     // 기존 클릭 이벤트 제거 후 새 이벤트 추가
     submitButton.replaceWith(submitButton.cloneNode(true));
     document.getElementById('comment-submit').addEventListener('click', function () {
@@ -140,7 +142,7 @@ async function loadPosts() {
         document.getElementById('comment_cnt').textContent = `${data.data.comment_cnt} 댓글수`;
         document.getElementById('view_cnt').textContent = `${data.data.view_cnt} 조회수`;
         document.getElementById('author').textContent = data.data.author.nickname;
-        document.getElementById('created_at').textContent = data.data.created_at;
+        document.getElementById('created_at').textContent = data.data.updated_at_at ? data.data.updated_at : `${data.data.created_at} (수정됨)`;
 
         // 게시글 수정/삭제 버튼 처리
         const editDeleteButtons = document.getElementById('edit-delete-buttons');
@@ -171,18 +173,18 @@ async function loadPosts() {
                         </button>
                         <strong>${comment.author.nickname}</strong>
                     </div>
-                    <div class="comment-date">${comment.created_at}</div>
+                    <div class="comment-date">${comment.updated_at ? `${comment.updated_at} (수정됨)` : comment.created_at}</div>
                 </div>
                 ${isAuthor ? `
                 <div class="two-buttons">
                     <button class="detail-button" 
-                        onclick="editComment('${data.data.post_id}', '${comment.content}', ${comment.comment_id})">수정</button>
+                        onclick="editComment(${data.data.post_id}, ${comment.content}, ${comment.comment_id})">수정</button>
                     <button class="detail-button" 
                         onclick="openCommentModal(${comment.comment_id})">삭제</button>
                 </div>` : ''}
             </div>
             <br />
-            <span>${comment.content}</span>
+            <span id = "comment-content">${comment.content}</span>
         `;
 
         // nickname과 content를 텍스트로 표시

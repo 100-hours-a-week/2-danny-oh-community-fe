@@ -64,7 +64,11 @@ async function loadPosts(page) {
     
             const postDate = document.createElement("div");
             postDate.classList.add("post-date");
-            postDate.textContent = post.created_at;
+            if (post.updated_at){
+                postDate.textContent = `${post.updated_at} (수정됨)`;
+            } else{
+                postDate.textContent = post.created_at;
+            }
     
             postTitle.appendChild(titleElement);
             postTitle.appendChild(postInfo);
@@ -131,7 +135,7 @@ async function fetchActiveUsers() {
             const listItem = document.createElement('li');
 
             // 이미지 URL 처리
-            const profileImage = user.profileImage || '/images/default-profile.png';
+            const profileImage = user.profileImage || '/images/profile_img.png';
             const nickname = user.nickname || 'Unknown User';
 
             // 이미지 요소 생성

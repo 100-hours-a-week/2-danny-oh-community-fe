@@ -296,11 +296,27 @@ hr {
     display: flex;
     flex-direction: column;
     width: 70%;
+    max-width: 70%;
 }
 
 .detail-body {
     text-align: center;
     width: 70%;
+    max-width: 70%;
+}
+
+.detail-body #content {
+    white-space: pre-wrap; /* 줄바꿈을 유지하며 자동 줄바꿈 */
+    word-wrap: break-word; /* 단어가 너무 길 경우 줄바꿈 */
+    word-break: break-word; /* 단어가 길어서 넘칠 경우 줄바꿈 */
+    overflow-wrap: break-word; /* 최신 브라우저 지원 */
+}
+
+#comment-content{
+    white-space: pre-wrap; /* 줄바꿈을 유지하며 자동 줄바꿈 */
+    word-wrap: break-word; /* 단어가 너무 길 경우 줄바꿈 */
+    word-break: break-word; /* 단어가 길어서 넘칠 경우 줄바꿈 */
+    overflow-wrap: break-word; /* 최신 브라우저 지원 */
 }
 
 .writer-profile {
