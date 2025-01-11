@@ -51,7 +51,7 @@ const nicknameRegex = /^[^\s]{1,10}$/;
 const emailInput = document.getElementById('id');
 const emailhelperText = document.getElementById('helper-text-email');
 
-emailInput.addEventListener('focusout', function () {
+emailInput.addEventListener('input', function () {
     const email = emailInput.value.trim();
     
     if (!email) {
@@ -71,7 +71,7 @@ const passInput1 = document.getElementById('pass1');
 const passInput2 = document.getElementById('pass2');
 const pass1helperText = document.getElementById('helper-text-pass1');
 
-passInput1.addEventListener('focusout', function () {
+passInput1.addEventListener('input', function () {
     const password1 = passInput1.value;
     const password2 = passInput2.value;
     if (!password1) {
@@ -92,7 +92,7 @@ passInput1.addEventListener('focusout', function () {
 // 비밀번호 확인 검사
 const pass2helperText = document.getElementById('helper-text-pass2');
 
-passInput2.addEventListener('focusout', function () {
+passInput2.addEventListener('input', function () {
     const password1 = passInput1.value;
     const password2 = passInput2.value;
     
@@ -111,7 +111,7 @@ passInput2.addEventListener('focusout', function () {
 const nicknameInput = document.getElementById('nickname');
 const nicknamehelperText = document.getElementById('helper-text-nickname');
 
-nicknameInput.addEventListener('focusout', function () {    
+nicknameInput.addEventListener('input', function () {    
     if (!nickname) {
         nicknamehelperText.textContent = '*닉네임을 입력해주세요.';
         nicknamehelperText.style.display = 'block';
@@ -153,50 +153,53 @@ nicknameInput.addEventListener('input', toggleSubmitButton);
 
 
 async function signup() {
-    const email = document.getElementById('id').value;
-    const password = document.getElementById('pass1').value;
-    const profileImage = document.getElementById('fileInput').files[0];
-    const nickname = document.getElementById('nickname').value;
+    if(submitButton.style.backgroundColor == '#7F6AEE'){
+        const email = document.getElementById('id').value;
+        const password = document.getElementById('pass1').value;
+        const profileImage = document.getElementById('fileInput').files[0];
+        const nickname = document.getElementById('nickname').value;
 
-    // FormData 객체를 생성하여 데이터를 전송
-    const formData = new FormData();
-    formData.append('email', email);
-    formData.append('password', password);
-    formData.append('nickname', nickname);
-    if (profileImage) {
-        formData.append('file', profileImage); 
-    }
-
-    try {
-        const response = await fetch(`http://13.209.17.149/api/auth/signup`, {
-            method: 'POST',
-            body: formData,
-            credentials: 'include'  // 쿠키 포함
-        });
-        if (response.status === 201) {
-            console.log('회원가입 성공');
-            alert('회원가입 성공!');
-            window.location.href = '/';
-        } else {
-            // 클라이언트 요청 에러 (상태 코드 400)
-            if (response.status === 400) {
-                console.log('이미 존재하는 이메일입니다.');
-                alert('이미 존재하는 이메일입니다.');
-            }
-            else if (response.status === 401) {
-                console.log('이미 존재하는 닉네임입니다.');
-                alert('이미 존재하는 닉네임입니다.');
-            }
-            // 서버 내부 오류 (상태 코드 500)
-            else if (response.status === 500) {
-                console.log(' 서버에 오류가 발생했습니다.');
-                alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
-            }
+        // FormData 객체를 생성하여 데이터를 전송
+        const formData = new FormData();
+        formData.append('email', email);
+        formData.append('password', password);
+        formData.append('nickname', nickname);
+        if (profileImage) {
+            formData.append('file', profileImage); 
         }
-    } catch (error) {
-        console.error('요청 오류:', error);
-        alert('오류가 발생했습니다.');
+
+        try {
+            const response = await fetch(`http://13.209.17.149/api/auth/signup`, {
+                method: 'POST',
+                body: formData,
+                credentials: 'include'  // 쿠키 포함
+            });
+            if (response.status === 201) {
+                console.log('회원가입 성공');
+                alert('회원가입 성공!');
+                window.location.href = '/';
+            } else {
+                // 클라이언트 요청 에러 (상태 코드 400)
+                if (response.status === 400) {
+                    console.log('이미 존재하는 이메일입니다.');
+                    alert('이미 존재하는 이메일입니다.');
+                }
+                else if (response.status === 401) {
+                    console.log('이미 존재하는 닉네임입니다.');
+                    alert('이미 존재하는 닉네임입니다.');
+                }
+                // 서버 내부 오류 (상태 코드 500)
+                else if (response.status === 500) {
+                    console.log(' 서버에 오류가 발생했습니다.');
+                    alert('서버에 오류가 발생했습니다. 잠시 후 다시 시도해주세요.');
+                }
+            }
+        } catch (error) {
+            console.error('요청 오류:', error);
+            alert('오류가 발생했습니다.');
+        }
     }
+
 }
 
 
