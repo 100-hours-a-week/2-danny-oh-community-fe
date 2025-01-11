@@ -182,7 +182,7 @@ async function loadPosts() {
                 </div>` : ''}
             </div>
             <br />
-            <span>${comment.content}</span>
+            <span id = "comment-content">${comment.content}</span>
         `;
 
         // nickname과 content를 텍스트로 표시
