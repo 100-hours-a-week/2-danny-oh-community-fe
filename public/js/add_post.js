@@ -1,9 +1,23 @@
-
-
 const titleInput = document.querySelector('input[type="text"]');
 const contentTextarea = document.querySelector('textarea');
 const submitButton = document.querySelector('.submit-button'); // 단일 요소 선택자로 변경
 const helperText = document.querySelector('.helper-text'); // 단일 요소 선택자로 변경
+// 최대 이미지 크기 제한 (5MB)
+const MAX_FILE_SIZE = 5 * 1024 * 1024; // 5MB
+// 이미지 미리보기 및 검증
+function previewImage(event) {
+    const file = event.target.files[0];
+    if (file) {
+        // 파일 크기 확인
+        if (file.size > MAX_FILE_SIZE) {
+            alert(`이미지 크기가 5MB를 초과했습니다. (현재 크기: ${(file.size / (1024 * 1024)).toFixed(2)}MB)`);
+            event.target.value = ""; // 파일 입력 초기화
+            return;
+        }
+        reader.readAsDataURL(file); // 파일을 읽음
+    }
+}
+
 
 // 제목 입력 제한 및 버튼 활성화 함수
 titleInput.addEventListener('input', () => {
