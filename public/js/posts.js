@@ -131,7 +131,7 @@ async function fetchActiveUsers() {
             const listItem = document.createElement('li');
 
             // 이미지 URL 처리
-            const profileImage = user.profileImage || '/images/default-profile.png';
+            const profileImage = user.profileImage || '/images/profile_img.png';
             const nickname = user.nickname || 'Unknown User';
 
             // 이미지 요소 생성
