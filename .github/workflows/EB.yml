@@ -1,0 +1,50 @@
+name: CI/CD Pipeline for ECR and EB
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      ECR_REGISTRY: 183295438985.dkr.ecr.ap-northeast-2.amazonaws.com
+      ECR_REPOSITORY: community-fe
+      IMAGE_TAG: 0.1
+    
+    steps:
+    # 1. Repository 체크아웃
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    # 2. AWS 인증 설정
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v3
+      with:
+        aws-access-key-id: ${{ secrets.ECR_USER_ACCESS_KEY }}
+        aws-secret-access-key: ${{ secrets.ECR_USER_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.ECR_USER_REGION }}
+
+    # 3. ECR 로그인
+    - name: Login to Amazon ECR
+      run: |
+        aws ecr get-login-password --region ${{ secrets.ECR_USER_REGION }} | docker login --username AWS --password-stdin $ECR_REGISTRY
+
+    # 4. Docker 이미지 빌드 및 ECR 푸시
+    - name: Build, tag, and push image to Amazon ECR
+      run: |
+        docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
+
+    # 5. EB 배포
+    - name: Deploy to Elastic Beanstalk
+      uses: einaregilsson/beanstalk-deploy@v21
+      with:
+        aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        application_name: danny-fe
+        environment_name: Danny-fe-env
+        version_label: "fe-${{ github.run_number }}"
+        region: ${{ secrets.ECR_USER_REGION }}
+        deployment_package: Dockerrun.aws.json
+        wait_for_environment_recovery: 300
