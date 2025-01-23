@@ -17,11 +17,6 @@ header {
 .head h1 {
     color: #fff;
     font-size: 50px;
-    transform: rotate(20deg) skew(-20deg);
-    -webkit-transform: rotate(20deg) skew(-20deg);
-    -moz-transform: rotate(20deg) skew(-20deg);
-    -o-transform: rotate(20deg) skew(-20deg);
-    -ms-transform: rotate(20deg) skew(-20deg);
     text-shadow: 1px 1px 0 #51B3A3, 
       2px 2px 0 #51B3A3, 
       3px 4px 0 #51B3A3, 
@@ -60,22 +55,6 @@ header {
       44px 45px 0 #389788,
       45px 46px 0 #389788,
       47px 47px 0 #389788,
-      48px 49px 0 #7ee5d6,
-      49px 51px 0 #7ee5d6,
-      50px 53px 0 #7ee5d6,
-      51px 55px 0 #7ee5d6,
-      52px 57px 0 #7ee5d6,
-      53px 59px 0 #7ee5d6,
-      54px 61px 0 #7ee5d6,
-      55px 63px 0 #7ee5d6,
-      56px 65px 0 #7ee5d6,
-      57px 67px 0 #7ee5d6,
-      58px 69px 0 #7ee5d6,
-      59px 71px 0 #7ee5d6,
-      60px 73px 0 #7ee5d6,
-      61px 75px 0 #7ee5d6,
-      62px 77px 0 #7ee5d6,
-      63px 79px 0 #7ee5d6,
       65px 80px 0 #51B3A3,
       68px 81px 0 #51B3A3,
       70px 82px 0 #51B3A3,
@@ -155,22 +134,6 @@ a {
       44px 45px 0 #389788,
       45px 46px 0 #389788,
       47px 47px 0 #389788,
-      48px 49px 0 #7ee5d6,
-      49px 51px 0 #7ee5d6,
-      50px 53px 0 #7ee5d6,
-      51px 55px 0 #7ee5d6,
-      52px 57px 0 #7ee5d6,
-      53px 59px 0 #7ee5d6,
-      54px 61px 0 #7ee5d6,
-      55px 63px 0 #7ee5d6,
-      56px 65px 0 #7ee5d6,
-      57px 67px 0 #7ee5d6,
-      58px 69px 0 #7ee5d6,
-      59px 71px 0 #7ee5d6,
-      60px 73px 0 #7ee5d6,
-      61px 75px 0 #7ee5d6,
-      62px 77px 0 #7ee5d6,
-      63px 79px 0 #7ee5d6,
       65px 80px 0 #51B3A3,
       68px 81px 0 #51B3A3,
       70px 82px 0 #51B3A3,
