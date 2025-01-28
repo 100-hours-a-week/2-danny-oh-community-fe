@@ -536,7 +536,7 @@ textarea {
     display: none;
     position: absolute;
     right: 25px;
-    top: 40px;
+    top: 60%;
     background-color: white; /* 배경색 */
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
     z-index: 1; /* 다른 요소 위에 표시 */
