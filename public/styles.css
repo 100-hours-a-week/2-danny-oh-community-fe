@@ -214,6 +214,22 @@ input {
     font-size: 15px;
 }
 
+.kakao-login {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+.kakao-login-btn img {
+max-width: 100%;
+height: auto;
+cursor: pointer;
+transition: transform 0.2s;
+}
+
+.kakao-login-btn img:hover {
+transform: scale(1.05);
+}
+
 .helper-text {
     font-size: 10px;
     color: red;
