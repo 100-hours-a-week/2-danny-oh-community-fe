@@ -94,6 +94,12 @@ async function load() {
             window.location.href = '/'; 
             return
         } 
+
+        if (data.email == 'kakao'){
+            alert('카카오 유저는 정보수정이 불가합니다.');
+            window.location.href = '/posts'; 
+            return
+        }
         document.getElementById('user_email').innerHTML = data.email;
         document.getElementById('profileImage').src = data.profileImage ? `${data.profileImage}` : '/images/profile_img.png';
         document.getElementById('nickname').value = data.nickname;
