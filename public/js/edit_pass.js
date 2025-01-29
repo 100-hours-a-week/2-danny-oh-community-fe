@@ -110,9 +110,33 @@ async function editPassword() {
 }
 
 
+async function load() {
+    try {
+        const response = await fetch(`http://13.209.17.149/api/user`, {
+            method: 'GET',
+            credentials: 'include', // 쿠키를 포함하여 요청을 보냄
+        });
 
+        const data = await response.json();
 
+        if (response.status === 400) {
+            alert('로그인이 필요합니다.');
+            window.location.href = '/'; 
+            return
+        } 
 
+        if (data.email == 'kakao'){
+            alert('카카오 유저는 정보수정이 불가합니다.');
+            window.location.href = '/posts'; 
+            return
+        }
+    } catch (error) {
+        console.error('로드 오류:', error);
+        alert('오류가 발생했습니다.');
+    }
+}
+
+load();
 // 회원가입 버튼 클릭 시 로그인 페이지로 이동
 submitButton.addEventListener('click', editPassword);
 
