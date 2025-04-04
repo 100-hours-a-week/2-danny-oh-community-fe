@@ -1,0 +1,354 @@
+/* 로그인 페이지 전용 CSS */
+@import url(https://fonts.googleapis.com/css?family=Press+Start+2P);
+
+/* 로그인 폼 전체 컨테이너 */
+.login-form-container {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.1),       /* 아래쪽 그림자 */
+        0 6px 0 #389788,                      /* 하단 배경 그림자 (3D 효과) */
+        0 8px 15px rgba(0, 0, 0, 0.15),       /* 아래쪽 흐린 그림자 */
+        inset 0 -4px 5px rgba(0, 0, 0, 0.05); /* 내부 그림자 */
+    width: 90%;
+    max-width: 400px; /* 최대 너비 조정 */
+    margin-bottom: 40px;
+    box-sizing: border-box;
+    position: relative;
+    transform: translateZ(0);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border: 1px solid rgba(255, 255, 255, 0.7);
+}
+
+/* 로그인 컨테이너 내부 article */
+.login-article {
+    width: 100%; /* 너비 확장 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0; /* 패딩 제거 */
+    row-gap: 0;
+    box-sizing: border-box;
+}
+
+/* 로그인 폼 제목 */
+.login-title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+    font-size: 24px;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
+}
+
+/* 인풋 필드 스타일 수정 */
+.inputBox {
+    display: flex;
+    flex-direction: column;
+    row-gap: 8px;
+    width: 100%; /* 너비 확장 */
+    position: relative;
+    margin-bottom: 15px;
+    box-sizing: border-box;
+}
+
+.inputBox input {
+    height: 45px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    padding: 0 15px 0 40px; /* 아이콘을 위한 왼쪽 패딩 추가 */
+    font-size: 14px;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    background-color: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.inputBox input:focus {
+    outline: none;
+    border-color: #7F6AEE;
+    box-shadow: 
+        inset 0 1px 3px rgba(0, 0, 0, 0.1),
+        0 0 0 2px rgba(127, 106, 238, 0.2);
+}
+
+/* 인풋 레이블 */
+.inputBox label {
+    color: #555;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 인풋 아이콘 스타일 */
+.input-icon {
+    position: absolute;
+    left: 12px;
+    top: 38px;
+    color: #999;
+    width: 16px;
+    height: 16px;
+    box-sizing: border-box;
+}
+
+.buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 20px;
+    width: 100%; /* 너비 확장 */
+    box-sizing: border-box;
+}
+
+.submit-button {
+    text-align: center;
+    height: 50px;
+    width: 100%; /* 너비 확장 */
+    max-width: 300px; /* 최대 너비 제한 */
+    background-color: #ACA0EB;
+    border-radius: 25px; /* 더 부드러운 모서리 */
+    border: none;
+    font-size: 18px;
+    padding: 5px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 
+        0 4px 6px rgba(0, 0, 0, 0.1),
+        0 2px 0 #7F6AEE,               /* 3D 효과를 위한 하단 테두리 */
+        inset 0 -2px 5px rgba(0, 0, 0, 0.1);  /* 내부 그림자 */
+    font-weight: bold;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.submit-button:hover {
+    background-color: #7F6AEE;
+    transform: translateY(-2px);
+    box-shadow: 
+        0 6px 8px rgba(0, 0, 0, 0.15),
+        0 4px 0 #7F6AEE,
+        inset 0 -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.submit-button:active {
+    transform: translateY(0px);
+    box-shadow: 
+        0 2px 3px rgba(0, 0, 0, 0.1),
+        0 1px 0 #7F6AEE,
+        inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+}
+
+#sign {
+    font-size: 15px;
+    color: #555;
+    padding: 8px 12px;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+    box-sizing: border-box;
+}
+
+#sign:hover {
+    color: #7F6AEE;
+    background-color: rgba(127, 106, 238, 0.1);
+}
+
+.kakao-login {
+    text-align: center;
+    margin-top: 30px;
+    position: relative;
+    width: 100%; /* 너비 확장 */
+    box-sizing: border-box;
+}
+
+.kakao-login::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%; /* 구분선 너비 조정 */
+    height: 1px;
+    background: #ddd;
+}
+
+.kakao-login-btn {
+    display: inline-block;
+    width: 100%;
+    max-width: 300px; /* 최대 너비 제한 */
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.kakao-login-btn img {
+    max-width: 100%;
+    height: auto;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+    border-radius: 12px;
+    box-sizing: border-box;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+}
+
+.kakao-login-btn img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.helper-text {
+    font-size: 12px;
+    color: #e74c3c;
+    margin-top: -5px;
+    margin-bottom: 5px;
+    transition: all 0.3s ease;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.helper-text.show {
+    opacity: 1;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+/* 에러 메시지 스타일 */
+.error-message-container {
+    background-color: #fee;
+    color: #e74c3c;
+    padding: 10px 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border-left: 4px solid #e74c3c;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    animation: fadeIn 0.3s ease;
+    width: 100%; /* 너비 확장 */
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* 애니메이션 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 모바일 최적화를 위한 미디어 쿼리 */
+@media screen and (max-width: 768px) {
+    .login-form-container {
+        width: 85%;
+        padding: 20px;
+        margin-top: 20px; /* 윗쪽 여백 추가 */
+        box-shadow: 
+            0 8px 20px rgba(0, 0, 0, 0.1),
+            0 4px 0 #389788,
+            0 6px 10px rgba(0, 0, 0, 0.15),
+            inset 0 -3px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    .login-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .inputBox {
+        margin-bottom: 12px;
+    }
+
+    .inputBox label {
+        font-size: 12px;
+    }
+
+    .inputBox input {
+        height: 40px;
+        font-size: 13px;
+    }
+
+    .input-icon {
+        top: 32px;
+    }
+
+    .submit-button {
+        height: 45px;
+        font-size: 16px;
+    }
+
+    #sign {
+        font-size: 13px;
+    }
+
+    .kakao-login {
+        margin-top: 20px;
+    }
+
+    .kakao-login-btn img {
+        max-width: 240px;
+    }
+
+    .error-message-container {
+        font-size: 12px;
+        padding: 8px 12px;
+    }
+}
+
+/* 더 작은 화면에 대한 추가 최적화 */
+@media screen and (max-width: 400px) {
+    .login-form-container {
+        width: 92%;
+        padding: 15px;
+        margin: 15px auto; /* 여백 조정 */
+        max-width: 92%;
+        box-shadow: 
+            0 6px 15px rgba(0, 0, 0, 0.1),
+            0 3px 0 #389788,
+            0 5px 8px rgba(0, 0, 0, 0.15),
+            inset 0 -2px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .login-title {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .inputBox label {
+        font-size: 11px;
+    }
+
+    .inputBox input {
+        height: 38px;
+        font-size: 12px;
+    }
+
+    .input-icon {
+        top: 30px;
+        font-size: 14px;
+    }
+
+    .submit-button {
+        height: 40px;
+        font-size: 14px;
+    }
+
+    #sign {
+        font-size: 12px;
+    }
+
+    .kakao-login-btn img {
+        max-width: 200px;
+    }
+} 

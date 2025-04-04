@@ -1,0 +1,245 @@
+/* 공통 스타일 CSS */
+@import url(https://fonts.googleapis.com/css?family=Press+Start+2P);
+
+body {
+    padding-bottom: 10%;
+    font-family: 'Press Start 2P', cursive;
+    background: #59C4B4;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+    max-width: 100%; /* 최대 너비 제한 */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    padding-bottom: 10%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+html {
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+    max-width: 100%; /* 최대 너비 제한 */
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 100px 20px 100px; /* 좌우 패딩 추가 */
+    width: 100%;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+}
+
+.head h1 {
+    color: #fff;
+    font-size: 50px;
+    text-shadow: 1px 1px 0 #51B3A3, 
+      2px 2px 0 #51B3A3, 
+      3px 4px 0 #51B3A3, 
+      4px 5px 0 #51B3A3,
+      5px 7px 0 #51B3A3,
+      6px 8px 0 #51B3A3,
+      7px 10px 0 #51B3A3,
+      8px 11px 0 #51B3A3,
+      9px 13px 0 #51B3A3,
+      10px 14px 0 #51B3A3,
+      11px 16px 0 #51B3A3,
+      12px 17px 0 #51B3A3,
+      13px 19px 0 #51B3A3,
+      14px 20px 0 #51B3A3,
+      15px 22px 0 #51B3A3,
+      16px 23px 0 #51B3A3,
+      17px 25px 0 #51B3A3,
+      18px 26px 0 #51B3A3,
+      19px 28px 0 #51B3A3,
+      20px 29px 0 #51B3A3,
+      21px 30px 0 #389788,
+      23px 31px 0 #389788,
+      24px 32px 0 #389788,
+      26px 33px 0 #389788,
+      27px 34px 0 #389788,
+      29px 35px 0 #389788,
+      30px 36px 0 #389788,
+      32px 37px 0 #389788,
+      33px 38px 0 #389788,
+      35px 39px 0 #389788,
+      36px 40px 0 #389788,
+      38px 41px 0 #389788,
+      39px 42px 0 #389788,
+      41px 43px 0 #389788,
+      42px 44px 0 #389788,
+      44px 45px 0 #389788,
+      45px 46px 0 #389788,
+      47px 47px 0 #389788,
+      65px 80px 0 #51B3A3,
+      68px 81px 0 #51B3A3,
+      70px 82px 0 #51B3A3,
+      72px 83px 0 #51B3A3,
+      74px 84px 0 #51B3A3,
+      76px 85px 0 #51B3A3,
+      78px 86px 0 #51B3A3,
+      80px 87px 0 #51B3A3,
+      82px 88px 0 #51B3A3,
+      84px 89px 0 #51B3A3,
+      86px 90px 0 #51B3A3,
+      88px 91px 0 #51B3A3,
+      90px 92px 0 #51B3A3;
+    max-width: 100%; /* 최대 너비 제한 */
+    word-break: break-word; /* 단어 줄바꿈 */
+    text-align: center; /* 중앙 정렬 */
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.back-button {
+    background: none;
+    border: none;
+    padding: 0;
+    position: absolute;
+    left: 25px; /* 좌측 고정 */
+    cursor: pointer;
+}
+
+.back-image {
+    width: 50px;
+}
+
+.warp {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    overflow-x: hidden; /* 가로 스크롤 방지 */
+    padding-top: 10px; /* 상단 여백 추가 */
+}
+
+/* 일반 article 스타일 - 로그인 article은 제외 */
+article:not(.login-article) {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    row-gap: 20px;
+    max-width: 100%; /* 최대 너비 제한 */
+}
+
+/* 토스트 메시지 스타일 */
+.toast {
+    visibility: hidden;
+    min-width: 10%;
+    background-color: #ACA0EB;
+    color: #fff;
+    text-align: center;
+    border-radius: 20px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+    font-size: 17px;
+    opacity: 0;
+    transform: translateX(-50%); /* 가로 기준 중앙 정렬 */
+    transition: opacity 0.5s, bottom 0.5s;
+}
+
+.toast.show {
+    visibility: visible;
+    opacity: 1;
+    bottom: 20%;
+}
+
+/* 모바일 최적화를 위한 미디어 쿼리 */
+@media screen and (max-width: 768px) {
+    body {
+        padding-bottom: 5%;
+    }
+
+    header {
+        padding: 50px 20px 70px; /* 패딩 조정 */
+    }
+
+    .warp {
+        padding: 0 10px;
+    }
+
+    article:not(.login-article) {
+        width: 90%;
+    }
+
+    .back-button {
+        left: 15px;
+        top: 15px;
+    }
+
+    .back-image {
+        width: 40px;
+    }
+
+    .toast {
+        min-width: 70%;
+        font-size: 14px;
+        padding: 12px;
+    }
+    
+    .head h1 {
+        font-size: 30px !important;
+        text-shadow: 1px 1px 0 #51B3A3,
+            2px 2px 0 #51B3A3,
+            3px 3px 0 #51B3A3,
+            4px 4px 0 #389788,
+            5px 5px 0 #389788 !important;
+    }
+}
+
+/* 더 작은 모바일 화면 */
+@media screen and (max-width: 400px) {
+    body {
+        padding-bottom: 3%;
+    }
+
+    header {
+        padding: 40px 15px 50px; /* 패딩 조정 */
+    }
+
+    article:not(.login-article) {
+        width: 95%;
+        row-gap: 15px;
+    }
+
+    .back-button {
+        left: 10px;
+        top: 10px;
+    }
+
+    .back-image {
+        width: 35px;
+    }
+
+    .toast {
+        min-width: 80%;
+        font-size: 12px;
+        padding: 10px;
+    }
+    
+    .head h1 {
+        font-size: 24px !important;
+    }
+} 
