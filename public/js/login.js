@@ -133,7 +133,7 @@ async function login() {
         loginButton.disabled = true;
 
         try {
-            const response = await fetch(`http://13.209.17.149/api/auth/login`, {
+            const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -148,6 +148,11 @@ async function login() {
                 // 로그인 성공 애니메이션
                 loginButton.innerHTML = '<i class="fas fa-check"></i> 성공!';
                 loginButton.style.backgroundColor = '#27ae60';
+                
+                // 토큰이 있으면 로컬 스토리지에 저장
+                if (responseData.token) {
+                    localStorage.setItem(TOKEN_KEY, responseData.token);
+                }
                 
                 // 잠시 후 리디렉션
                 setTimeout(() => {
@@ -177,6 +182,22 @@ async function login() {
             console.error('로그인 요청 오류:', error);
             showErrorMessage('로그인 중 오류가 발생했습니다.');
         }
+    }
+}
+
+// 카카오 로그인 처리 함수
+function initKakaoLogin() {
+    const kakaoLoginBtn = document.getElementById('kakao-login-btn');
+    if (kakaoLoginBtn) {
+        kakaoLoginBtn.addEventListener('click', () => {
+            // 카카오 로그인 요청 URL 생성 (클라이언트 ID와 리다이렉트 URL 사용)
+            const clientId = '460b66b189d9e6618b2397d5522cdcfa'; // 카카오 클라이언트 ID
+            const redirectUri = encodeURIComponent(`${API_BASE_URL}/api/auth/kakao`);
+            const kakaoAuthUrl = `https://kauth.kakao.com/oauth/authorize?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=code`;
+            
+            // 카카오 로그인 페이지로 리다이렉션
+            window.location.href = kakaoAuthUrl;
+        });
     }
 }
 
@@ -247,9 +268,17 @@ function init() {
     // 버튼 초기 상태 설정
     updateButtonState();
     
+    // 카카오 로그인 초기화
+    initKakaoLogin();
+    
     // 이메일과 비밀번호 입력 필드에 이벤트 리스너 추가
     document.getElementById('id').addEventListener('keydown', handleKeydown);
     document.getElementById('pw').addEventListener('keydown', handleKeydown);
+    
+    // 개발 모드일 때 콘솔에 API 주소 표시
+    if (IS_DEV) {
+        console.log('API Base URL:', API_BASE_URL);
+    }
 }
 
 // 페이지 로드 시 초기화
